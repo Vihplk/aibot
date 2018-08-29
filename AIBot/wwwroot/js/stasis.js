@@ -14,27 +14,29 @@ $(document).ready(function () {
         ],
         dataSource: []
     });
-    function bindViewModel(values) {
-        var viewModel = kendo.observable({
-            selectSession: null,
-            sessions: values,
-            onSelect: (e) => {
-                //var xxx = this.get("selectSession");
-                xhr('/api/sessions/7','get', (e) => {
-                    var grid = $("#grid").data("kendoGrid");
-                    grid.setDataSource(e);
-                });
-                
-            }
-        });
-        kendo.bind($("#placeholder"), viewModel);
+
+    $("#sessions").kendoComboBox({
+        dataTextField: "value",
+        dataValueField: "key",
+        filter: "contains",
+        suggest: true,
+        select: (e) => {
+            xhr('/api/sessions/' + e.dataItem.key, 'get', (e) => {
+                var grid = $("#grid").data("kendoGrid");
+                grid.setDataSource(e);
+            });
+        }
+    });
+
+    function setSessions(values) {
+        $("#sessions").data("kendoComboBox").setDataSource(values);
     }
 
-   
+ 
     function createChart() {
         $("#chart").kendoChart({
             title: {
-                text: "Your overrole status?"
+                text: "Your overrole status"
             },
             legend: {
                 position: "top"
@@ -130,7 +132,7 @@ $(document).ready(function () {
     }
 
     xhr('/api/sessions','get', (e) => {
-        bindViewModel(e);
+        setSessions(e);
     });
 
     $('#logout').click(() => {

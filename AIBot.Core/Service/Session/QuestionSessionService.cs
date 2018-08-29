@@ -50,8 +50,16 @@ namespace AIBot.Core.Service.Session
             foreach (var item in questions)
             {
                 var answeritem = answers.FirstOrDefault(p => p.QuestionId == item.Id);
-                var ans = answeritem.IsNull() ? "" : answeritem.UserAnswer;
-                result.Add(new UserSessionAnswerDto(index,item.QuestionName,ans,answeritem.Value,answeritem.MatchingPercentageSummery));
+                var value = -1;
+                var matchingPercentageSummery = string.Empty;
+                var answer = string.Empty;
+                if (!answeritem.IsNull())
+                {
+                    answer = answeritem.UserAnswer;
+                    value = answeritem.Value;
+                    matchingPercentageSummery = answeritem.MatchingPercentageSummery;
+                }
+                result.Add(new UserSessionAnswerDto(index,item.QuestionName, answer, value, matchingPercentageSummery));
                 index++;
             }
             return result;

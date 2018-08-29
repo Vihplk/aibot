@@ -49,16 +49,7 @@
             <img src="../images/chatbot_rating.PNG"/>
             <div id="placeholder">
                 <b>Your Sessions</b>
-                <input data-role="combobox"
-                       data-value-primitive="true"
-                       data-text-field="value"
-                       data-value-field="key"
-                       data-bind="value: selectSession,
-                              source: sessions,
-                              events: {
-                                select: onSelect
-                              }"
-                       style="width: 100%"/>
+                <input id="sessions" placeholder="Select session..." style="width: 100%;" />
                 <div id="grid" style="width: 1700px"></div>
             </div>
         </div>
