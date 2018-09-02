@@ -30,7 +30,7 @@ namespace AIBot.Controllers
         {
             try
             {
-                var question = (await _botService.Read(id));
+                var question = (await _botService.Read(id, UserId));
                 question.QuestionName = question.QuestionName.ApplyRegx(DisplayName);
                 return Ok(question);
             }

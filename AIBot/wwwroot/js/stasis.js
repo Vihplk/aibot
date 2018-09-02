@@ -57,8 +57,8 @@ $(document).ready(function () {
             },
             series: [{
                 type: "line",
-                field: "value",
-                categoryField: "key"
+                field: "key",
+                categoryField: "value"
             }]
         });
     }
