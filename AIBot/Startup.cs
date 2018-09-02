@@ -12,7 +12,6 @@ using AIBot.Core.Service.Interface;
 using AIBot.Core.Service.Session;
 using AIBot.Core.Service.User;
 using AutoMapper;
-using StackExchange.Redis;
 
 namespace AIBot
 {
@@ -48,7 +47,7 @@ namespace AIBot
             services.AddTransient<ISecurityService, SecurityService>();
             services.AddTransient<IQuestionSessionService, QuestionSessionService>();
             services.AddTransient<IBotService, BotService>();
-
+            services.AddTransient<ITimeSeriesService, TimeSeriesService>();
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<QuestionDto, Question>().ReverseMap();

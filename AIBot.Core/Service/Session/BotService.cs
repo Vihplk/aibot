@@ -31,7 +31,6 @@ namespace AIBot.Core.Service.Session
             }
             return result;
         }
-
         public async Task GiveAnswer(UserAnswerDto request)
         {
             var @answer = new UserSessionAnswer(request.SessionId,request.QuestionId);

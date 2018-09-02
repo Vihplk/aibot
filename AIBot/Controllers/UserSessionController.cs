@@ -51,5 +51,18 @@ namespace AIBot.Controllers
                 return await HandleException(e);
             }
         }
+
+        [HttpGet, Route("sessions/graph")]
+        public async Task<IActionResult> GetResultGraph()
+        {
+            try
+            {
+                return Ok(await _sessionService.GetResultGraph(UserId));
+            }
+            catch (Exception e)
+            {
+                return await HandleException(e);
+            }
+        }
     }
 }

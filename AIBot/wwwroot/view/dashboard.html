@@ -39,18 +39,71 @@
         <h3 class="text-muted">AI Consulting</h3>
     </div>
     <div class="row marketing">
-        <div class="col-lg-6">
-            <div id="chart"></div>
-        </div>
-        <div class="col-lg-6">
-            <div id="chart2"></div>
-        </div>
-        <div class="col-lg-12">
-            <img src="../images/chatbot_rating.PNG"/>
-            <div id="placeholder">
-                <b>Your Sessions</b>
-                <input id="sessions" placeholder="Select session..." style="width: 100%;" />
-                <div id="grid" style="width: 1700px"></div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Graph</a></li>
+            <li><a data-toggle="tab" href="#menu1">Result</a></li>
+            <li><a data-toggle="tab" href="#menu2">Forcasting</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <div class="col-lg-12">
+                    <div id="chart2"></div>
+                </div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <div class="col-lg-12">
+                    <img src="../images/chatbot_rating.PNG"/>
+                    <div id="placeholder">
+                        <b>Your Sessions</b>
+                        <input id="sessions" placeholder="Select session..." style="width: 100%;"/>
+                        <div id="grid" style="width: 1700px"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <div class="col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <br/>
+                        <button type="button" id="naive" class="btn btn-default">Naive</button>
+                        <button type="button" id="sma" class="btn btn-default">SMA</button>
+                        <button type="button" id="wma" class="btn btn-default">WMA</button>
+                        <button type="button" id="es" class="btn btn-default">ES</button>
+                        <button type="button" id="ars" class="btn btn-default">ARS</button>
+                        <br/>
+                        <h1 id="type"></h1>
+                        <br/>
+                        <table class="table table-condensed" width="50%">
+                            <tr class="danger">
+                                <td>MSD</td>
+                                <td><label id="msd">0</label></td>
+                            </tr>
+                            <tr class="info">
+                                <td>MAD</td>
+                                <td>
+                                    <label id="mad">0</label>
+                                </td>
+                            </tr>
+                            <tr class="danger">
+                                <td>MPE</td>
+                                <td><label id="mpe">0</label></td>
+                            </tr>
+                            <tr class="info">
+                                <td>MAPE</td>
+                                <td><label id="mape">0</label></td>
+                            </tr>
+                            <tr class="danger">
+                                <td>TS</td>
+                                <td><label id="ts">0</label></td>
+                            </tr>
+                            <tr class="info">
+                                <td>MSE</td>
+                                <td><label id="mse">0</label></td>
+                            </tr>
+                        </table>
+                        <div id="grid2"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -58,8 +111,8 @@
         <p>sliit 4th year project</p>
     </footer>
 
-</div>
- 
+</div> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://getbootstrap.com/docs/3.3/assets/js/ie10-viewport-bug-workaround.js"></script>
 <script src="../js/session.js"></script>
 <script src="../js/stasis.js"></script>

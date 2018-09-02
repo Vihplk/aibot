@@ -14,6 +14,20 @@ $(document).ready(function () {
         ],
         dataSource: []
     });
+    $("#grid2").kendoGrid({
+        selectable: "multiple cell",
+        allowCopy: true,
+        columns: [
+            { field: "instance" },
+            { field: "value" },
+            { field: "forecast" },
+            { field: "error" },
+            { field: "absoluteError" },
+            { field: "percentError" },
+            { field: "absolutePercentError" }
+        ],
+        dataSource: []
+    });
 
     $("#sessions").kendoComboBox({
         dataTextField: "value",
@@ -33,88 +47,57 @@ $(document).ready(function () {
     }
 
  
-    function createChart() {
-        $("#chart").kendoChart({
-            title: {
-                text: "Your overrole status"
-            },
-            legend: {
-                position: "top"
-            },
-            seriesDefaults: {
-                labels: {
-                    template: "#= category # - #= kendo.format('{0:P}', percentage)#",
-                    position: "outsideEnd",
-                    visible: true,
-                    background: "transparent"
-                }
-            },
-            series: [{
-                type: "donut",
-                data: [{
-                    category: "One",
-                    value: 35
-                }, {
-                    category: "Two",
-                    value: 25
-                }, {
-                    category: "Three",
-                    value: 20
-                }, {
-                    category: "Four",
-                    value: 10
-                }, {
-                    category: "Five",
-                    value: 10
-                }]
-            }],
-            tooltip: {
-                visible: true,
-                template: "#= category # - #= kendo.format('{0:P}', percentage) #"
-            }
-        });
-    }
-
-    createChart();
-
-    function createChart2() {
+    function createChart2(e) {
         $("#chart2").kendoChart({
             title: {
                 text: "Your Status with Time"
             },
             dataSource: {
-                data: [
-                    { value: 30, date: new Date("2011/12/20") },
-                    { value: 50, date: new Date("2011/12/21") },
-                    { value: 45, date: new Date("2011/12/22") },
-                    { value: 40, date: new Date("2011/12/23") },
-                    { value: 35, date: new Date("2011/12/24") },
-                    { value: 40, date: new Date("2011/12/25") },
-                    { value: 42, date: new Date("2011/12/26") },
-                    { value: 40, date: new Date("2011/12/27") },
-                    { value: 35, date: new Date("2011/12/28") },
-                    { value: 43, date: new Date("2011/12/29") },
-                    { value: 38, date: new Date("2011/12/30") },
-                    { value: 30, date: new Date("2011/12/31") },
-                    { value: 48, date: new Date("2012/01/01") },
-                    { value: 50, date: new Date("2012/01/02") },
-                    { value: 55, date: new Date("2012/01/03") },
-                    { value: 35, date: new Date("2012/01/04") },
-                    { value: 30, date: new Date("2012/01/05") }
-                ]
+                data: e
             },
             series: [{
                 type: "line",
-                aggregate: "avg",
                 field: "value",
-                categoryField: "date"
-            }],
-            categoryAxis: {
-                baseUnit: "weeks"
-            }
+                categoryField: "key"
+            }]
         });
     }
-    createChart2();
+    xhr('/api/sessions/graph', 'get', (e) => {
+        createChart2(e);
+    });
+
+
+    function forecast(searchby) {
+
+        xhr('/api/forecast/' + searchby, 'get', (e) => {
+            var grid = $("#grid2").data("kendoGrid");
+            grid.setDataSource(e.forecastList);
+            $('#type').html(e.masterData.type);
+            $('#mad').html(e.masterData.mad);
+            $('#mape').html(e.masterData.mape);
+            $('#mpe').html(e.masterData.mpe);
+            $('#msd').html(e.masterData.msd);
+            $('#mse').html(e.masterData.mse);
+            $('#ts').html(e.masterData.ts);
+        });
+    }
+    $('#naive').click(() => {
+        forecast('naive');
+    });
+    $('#sma').click(() => {
+        forecast('sma');
+    });
+    $('#wma').click(() => {
+        forecast('wma');
+    });
+    $('#es').click(() => {
+        forecast('es');
+    });
+    $('#ars').click(() => {
+        forecast('ars');
+    });
+    forecast('naive');
+
     function xhr(url, type, callback) {
         $.ajax({
             url: baseurl+url,

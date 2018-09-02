@@ -12,5 +12,7 @@ namespace AIBot.Core.Service.Interface
         Task<List<KeyValuePair<int, DateTime>>> GetAllSession(int userid);
         Task<List<UserSessionAnswerDto>> GetSessionInfo(int sessionid);
         Task<List<AnswerDto>> GetAllPossibleSystemAnswers();
+        Task<List<KeyValuePair<decimal, string>>> GetResultGraph(int userid);
+        Task<List<decimal>> GetResults(int userid);
     }
 }

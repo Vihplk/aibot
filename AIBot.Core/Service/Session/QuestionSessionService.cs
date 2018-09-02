@@ -32,7 +32,8 @@ namespace AIBot.Core.Service.Session
         public async Task<List<KeyValuePair<int, DateTime>>> GetAllSession(int userid)
         {
             return (await (_unitOfWork.UserSessionRepository.TableAsNoTracking
-                        .Where(p => p.UserId == userid).Select(p => new {p.Id, p.DateTime}))
+                        .Where(p => p.UserId == userid && p.IsSessionComplete).Select(p => new {p.Id, p.DateTime}))
+                    .OrderByDescending(p => p.Id)
                     .ToListAsync()).Select(p => new KeyValuePair<int, DateTime>(p.Id, p.DateTime))
                 .ToList();
         }
@@ -70,6 +71,25 @@ namespace AIBot.Core.Service.Session
             return (await _unitOfWork.AnswerRepository.TableAsNoTracking
                     .ToListAsync()).Select(AutoMapper.Mapper.Map<AnswerDto>)
                 .ToList();
+        }
+
+        public async  Task<List<KeyValuePair<decimal, string>>> GetResultGraph(int userid)
+        {
+            return (await(_unitOfWork.UserSessionRepository.TableAsNoTracking
+                        .Where(p => p.UserId == userid && p.IsSessionComplete)
+                        .Select(p => new {p.Marks, p.DateTime, p.Id}))
+                    .OrderBy(p => p.Id)
+                    .ToListAsync()).Select(p =>
+                    new KeyValuePair<decimal, string>(p.Marks, p.DateTime.ToShortDateString()))
+                .ToList();
+        }
+
+        public async Task<List<decimal>> GetResults(int userid)
+        {
+            return (await(_unitOfWork.UserSessionRepository.TableAsNoTracking
+                .Where(p => p.UserId == userid && p.IsSessionComplete).Select(p => new {p.Marks, p.Id})
+                .OrderBy(p => p.Id)
+                .ToListAsync())).Select(p => p.Marks).ToList();
         }
     }
 }
