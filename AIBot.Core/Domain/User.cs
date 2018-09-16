@@ -12,5 +12,13 @@ namespace AIBot.Core.Domain
         public string Email { get; set; }
         [StringLength(50), Column(TypeName = "VARCHAR(50)")]
         public string Password { get; set; }
+
+        public User Create(string name,string email,string password)
+        {
+            this.Name = name;
+            this.Email = email;
+            this.Password = password;
+            return this;
+        }
     }
 }

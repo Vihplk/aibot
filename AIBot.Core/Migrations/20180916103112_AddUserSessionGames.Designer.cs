@@ -12,9 +12,10 @@ using System;
 namespace AIBot.Core.Migrations
 {
     [DbContext(typeof(AIBotDbContext))]
-    partial class AIBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180916103112_AddUserSessionGames")]
+    partial class AddUserSessionGames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,8 +96,6 @@ namespace AIBot.Core.Migrations
                     b.Property<Guid>("SessionGuid");
 
                     b.Property<decimal>("StressMarks");
-
-                    b.Property<int?>("StressType");
 
                     b.Property<int>("UserId");
 

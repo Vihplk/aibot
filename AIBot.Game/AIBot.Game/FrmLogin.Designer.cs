@@ -28,11 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtSession = new System.Windows.Forms.TextBox();
             this.btnEnter = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // txtSession
+            // 
+            this.txtSession.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSession.Location = new System.Drawing.Point(26, 62);
+            this.txtSession.Name = "txtSession";
+            this.txtSession.Size = new System.Drawing.Size(479, 26);
+            this.txtSession.TabIndex = 1;
+            // 
+            // btnEnter
+            // 
+            this.btnEnter.Location = new System.Drawing.Point(430, 114);
+            this.btnEnter.Name = "btnEnter";
+            this.btnEnter.Size = new System.Drawing.Size(75, 23);
+            this.btnEnter.TabIndex = 3;
+            this.btnEnter.Text = "ENTER";
+            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
             // 
             // pictureBox1
             // 
@@ -44,24 +62,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // txtSession
-            // 
-            this.txtSession.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSession.Location = new System.Drawing.Point(108, 66);
-            this.txtSession.Name = "txtSession";
-            this.txtSession.Size = new System.Drawing.Size(318, 26);
-            this.txtSession.TabIndex = 1;
-            // 
-            // btnEnter
-            // 
-            this.btnEnter.Location = new System.Drawing.Point(351, 116);
-            this.btnEnter.Name = "btnEnter";
-            this.btnEnter.Size = new System.Drawing.Size(75, 23);
-            this.btnEnter.TabIndex = 3;
-            this.btnEnter.Text = "ENTER";
-            this.btnEnter.UseVisualStyleBackColor = true;
-            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
             // 
             // FrmLogin
             // 

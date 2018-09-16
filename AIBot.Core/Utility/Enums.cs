@@ -21,5 +21,14 @@ namespace AIBot.Core.Utility
             Random = 3,
             Over = 4
         }
+
+        public enum Game
+        {
+            StressOne,
+            StressTwo,
+            StresThree,
+            Anx,
+            Dep
+        }
     }
 }

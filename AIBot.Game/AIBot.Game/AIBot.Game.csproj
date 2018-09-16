@@ -102,6 +102,7 @@
     <Compile Include="UC\StressLevelTwo.Designer.cs">
       <DependentUpon>StressLevelTwo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\HttpRequester.cs" />
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>

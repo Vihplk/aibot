@@ -6,5 +6,6 @@ namespace AIBot.Core.Service.Interface
     public interface ISecurityService
     {
         Task<LoginResponseDto> Login(LoginRequestDto request);
+        Task<LoginResponseDto> Register(RegisterDto request);
     }
 }

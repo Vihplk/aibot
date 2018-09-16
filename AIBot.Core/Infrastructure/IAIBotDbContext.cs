@@ -11,5 +11,6 @@ namespace AIBot.Core.Infrastructure
         DbSet<User> User { get; set; }
         DbSet<UserSession> UserSession { get; set; }
         DbSet<UserSessionAnswer> UserSessionAnswer { get; set; }
+        DbSet<UserSessionGame> UserSessionGame { get; set; }
     }
 }

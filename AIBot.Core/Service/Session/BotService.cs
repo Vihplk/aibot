@@ -47,7 +47,7 @@ namespace AIBot.Core.Service.Session
                     {
                         var sessionId = Guid.NewGuid();
                         await OverSession(sessionid, sessionId);
-                        exp = p => p.QuestionType == Enums.QuestionType.Over;
+                        throw new OverExamException($"Your exam is over. to play game use following token {sessionId}");
                     }
                 }
                 var result = Mapper.Map<QuestionDto>(await _uow.QuestionRepository.TableAsNoTracking
@@ -79,15 +79,21 @@ namespace AIBot.Core.Service.Session
                     }).ToListAsync()).Select(p => new KeyValuePareInfo<Enums.StressType, int>(p.StressType, p.Value))
                 .ToList();
 
-                var anxietyValue = Convert.ToDecimal(result.Where(p => p.Key == Enums.StressType.Anxiety).ToList().Sum(p => p.Value)) / 25 * 21;
-                var depressionValue = Convert.ToDecimal(result.Where(p => p.Key == Enums.StressType.Depression).ToList().Sum(p => p.Value)) / 25 *
-                                      21;
-                var stressValue = Convert.ToDecimal(result.Where(p => p.Key == Enums.StressType.Stress).ToList().Sum(p => p.Value)) / 25 * 21;
+            var anxietyValue =
+            (Convert.ToDecimal(result.Where(p => p.Key == Enums.StressType.Anxiety).ToList().Sum(p => p.Value)) *
+             100) / GlobalConfig.TotalQuestions;
+            var depressionValue =
+            (Convert.ToDecimal(result.Where(p => p.Key == Enums.StressType.Depression).ToList().Sum(p => p.Value)) *
+             100) / GlobalConfig.TotalQuestions;
+            var stressValue =
+            (Convert.ToDecimal(result.Where(p => p.Key == Enums.StressType.Stress).ToList().Sum(p => p.Value)) *
+             100) / GlobalConfig.TotalQuestions;
 
+            var stressType = GetStressType(new List<decimal>() {stressValue, anxietyValue, depressionValue});
 
-                var sessionObject = _uow.UserSessionRepository.Get(sessionid);
+            var sessionObject = _uow.UserSessionRepository.Get(sessionid);
             var rd = new Random();
-            sessionObject.SetResults(rd.Next(10, 50), rd.Next(10, 50), rd.Next(10, 50), sessionGuid);
+            sessionObject.SetResults(anxietyValue, depressionValue, stressValue, sessionGuid, stressType);
             await _uow.SaveAsync();
         }
 
@@ -120,6 +126,25 @@ namespace AIBot.Core.Service.Session
             @answer  = @answer.CreateAnswer(request.AnswerName).SetMatchingAnswer(request.MatchingAnswerId,request.MatchingPercentageSummary, request.Value);
            _uow.UserSessionAnswerRepository.Insert(@answer);
             await _uow.SaveAsync();
+        }
+
+        Enums.Game GetStressType(List<decimal> stessValues)
+        {
+
+            var marks = stessValues;
+
+            var max = marks.Max();
+            var index = marks.IndexOf(max);
+            Enums.Game gameState = index == 0 ? Enums.Game.StressOne :
+                index == 1 ? Enums.Game.Anx : Enums.Game.Dep;
+            ;
+
+            if (gameState == Enums.Game.StressOne)
+            {
+                gameState = max < 33.3m ? Enums.Game.StressOne :
+                    max < 66.7m ? Enums.Game.StressTwo : Enums.Game.StresThree;
+            }
+            return gameState;
         }
     }
 }

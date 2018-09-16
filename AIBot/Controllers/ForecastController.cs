@@ -38,6 +38,10 @@ namespace AIBot.Controllers
                         ? Enums.StressType.Depression
                         : Enums.StressType.Stress;
                  var result = await _questionSessionService.GetResults(UserId, stessType);
+                if (result.Count == 0)
+                {
+                    return Ok();
+                }
                 _forecasetService.SetType(forecasttype);
                 var forecastResponse = new ForecastingResponse();
                 switch (forecasttype)

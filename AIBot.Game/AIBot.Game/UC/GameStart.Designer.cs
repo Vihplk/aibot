@@ -39,7 +39,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Mistral", 50.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblName.Location = new System.Drawing.Point(297, 113);
+            this.lblName.Location = new System.Drawing.Point(290, 49);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(540, 79);
             this.lblName.TabIndex = 8;
@@ -48,7 +48,7 @@
             // picHero
             // 
             this.picHero.Image = global::AIBot.Game.Properties.Resources.supermanwin;
-            this.picHero.Location = new System.Drawing.Point(237, 215);
+            this.picHero.Location = new System.Drawing.Point(244, 149);
             this.picHero.Name = "picHero";
             this.picHero.Size = new System.Drawing.Size(240, 222);
             this.picHero.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -60,7 +60,7 @@
             this.btnStart.BackgroundImage = global::AIBot.Game.Properties.Resources.stard;
             this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnStart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStart.Location = new System.Drawing.Point(586, 207);
+            this.btnStart.Location = new System.Drawing.Point(592, 149);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(278, 230);
             this.btnStart.TabIndex = 6;

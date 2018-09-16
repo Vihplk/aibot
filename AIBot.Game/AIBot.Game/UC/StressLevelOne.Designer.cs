@@ -159,6 +159,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "StressLevelOne";
             this.Size = new System.Drawing.Size(1100, 550);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StressLevelOne_KeyDown);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.StressLevelOne_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.picHero)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

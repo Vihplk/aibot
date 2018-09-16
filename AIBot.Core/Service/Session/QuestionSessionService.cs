@@ -121,5 +121,31 @@ namespace AIBot.Core.Service.Session
                     throw new ArgumentException();
             } 
         }
+
+        public Enums.Game GetGame(string token)
+        {
+            var result = _unitOfWork.UserSessionRepository.TableAsNoTracking
+                .FirstOrDefault(p => p.SessionGuid == new Guid(token));
+
+            if (result.IsNull())
+            {
+                throw new RecordNotFound();
+            }
+
+            var marks = new List<decimal>() {result.StressMarks, result.AnxietyMarks, result.DepressionMarks};
+
+            var max = marks.Max();
+            var index = marks.IndexOf(max);
+            Enums.Game gameState = index == 0 ? Enums.Game.StressOne :
+                index == 1 ? Enums.Game.Anx : Enums.Game.Dep;
+            ;
+
+            if (gameState==Enums.Game.StressOne)
+            {
+                gameState = max < 33.3m ? Enums.Game.StressOne :
+                    max < 66.7m ? Enums.Game.StressTwo : Enums.Game.StresThree;
+            }
+            return gameState;
+        }
     }
 }

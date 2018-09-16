@@ -43,7 +43,7 @@ namespace AIBot.Game.Models
 
         public void RemovePicture(int width)
         {
-            PictureBox.Location = new Point(-200, 240);
+            PictureBox.Location = new Point(-500, 240);
         }
     }
 }

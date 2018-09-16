@@ -33,5 +33,19 @@ namespace AIBot.Controllers
                 return await HandleException(e);
             }
         }
+
+        [HttpPost, Route("registar"), AllowAnonymous]
+        public async Task<IActionResult> Register([FromBody]RegisterDto request)
+        {
+            try
+            {
+                var response = await _securityService.Register(request);
+                return Ok(_tokenGenarator.JwtTokenBuilder(response));
+            }
+            catch (Exception e)
+            {
+                return await HandleException(e);
+            }
+        }
     }
 }

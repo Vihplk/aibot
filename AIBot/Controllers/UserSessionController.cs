@@ -72,5 +72,10 @@ namespace AIBot.Controllers
                 return await HandleException(e);
             }
         }
+        [HttpGet, Route("sessions/game/{token}")]
+        public int GameAccess(string token)
+        {
+            return (int) _sessionService.GetGame(token);
+        }
     }
 }

@@ -32,6 +32,14 @@ namespace AIBot.Controllers
                 question.QuestionName = question.QuestionName.ApplyRegx(DisplayName);
                 return Ok(question);
             }
+            catch(OverExamException e)
+            {
+                return Ok(new QuestionDto
+                {
+                    IsQuestion = false,
+                    QuestionName = e.Message
+                });
+            }
             catch (Exception e)
             {
                 return await HandleException(e);

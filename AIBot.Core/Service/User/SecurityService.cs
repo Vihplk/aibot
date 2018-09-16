@@ -35,5 +35,21 @@ namespace AIBot.Core.Service.User
                 throw;
             }
         }
+
+        public async Task<LoginResponseDto> Register(RegisterDto request)
+        {
+            try
+            {
+                var @user = new Domain.User().Create(request.Name, request.Email,
+                    request.Password);
+                _unitOfWork.UserRepository.Insert(@user);
+                await _unitOfWork.SaveAsync();
+                return new LoginResponseDto(request.Email, request.Name, @user.Id);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

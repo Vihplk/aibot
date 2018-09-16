@@ -16,5 +16,6 @@ namespace AIBot.Core.Service.Interface
         Task<List<AnswerDto>> GetAllPossibleSystemAnswers();
         Task<List<ChartViewReuslt>> GetResultGraph(int userid);
         Task<List<decimal>> GetResults(int userid, Enums.StressType stessType);
+        Enums.Game GetGame(string token);
     }
 }

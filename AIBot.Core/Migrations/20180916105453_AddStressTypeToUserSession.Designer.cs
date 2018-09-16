@@ -12,9 +12,10 @@ using System;
 namespace AIBot.Core.Migrations
 {
     [DbContext(typeof(AIBotDbContext))]
-    partial class AIBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180916105453_AddStressTypeToUserSession")]
+    partial class AddStressTypeToUserSession
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

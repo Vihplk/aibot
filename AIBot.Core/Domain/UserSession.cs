@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using AIBot.Core.Utility;
 
 namespace AIBot.Core.Domain
 {
@@ -14,6 +15,7 @@ namespace AIBot.Core.Domain
         public decimal StressMarks { get; protected set; } = 0;
         public bool IsSessionComplete { get; protected set; }
         public Guid SessionGuid { get; protected set; }
+        public Enums.Game? StressType { get; protected set; }
 
         #region relations
         [ForeignKey("UserId")]
@@ -29,13 +31,14 @@ namespace AIBot.Core.Domain
             return this;
         }
 
-        public void SetResults(decimal anxietyMarks, decimal depressionMarks,decimal stressMarks,Guid sessionGuid)
+        public void SetResults(decimal anxietyMarks, decimal depressionMarks,decimal stressMarks,Guid sessionGuid, Enums.Game stressType)
         {
             AnxietyMarks = anxietyMarks;
             DepressionMarks = depressionMarks;
             StressMarks = stressMarks;
             IsSessionComplete = true;
             SessionGuid = sessionGuid;
+            StressType = stressType;
         }
     }
 }

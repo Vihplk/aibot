@@ -14,7 +14,7 @@ namespace AIBot.Game.UC
         private Enums.GameState GameState = Enums.GameState.Start;
         private int speed=5;
         private int heroX = 0, heroY = 0;
-        private int time = 0;
+        private int time = 50;
         private int success = 0, failed = 0;
         public StressLevelOne()
         {
@@ -50,14 +50,16 @@ namespace AIBot.Game.UC
                 if (activeBlock.PictureBox.ImagesAreOverlap(picHero))
                 {
                     failed++;
-                    lblFaild.Text = $"{failed}s";
+                    lblFaild.Text = $"{failed}";
                     activeBlock.RemovePicture(this.Width);
                     isActiveBlock = false;
+                    Console.Beep(226,1);
                 }
                 if (activeBlock.IsWent())
                 {
+                    Console.Beep(512, 1);
                     success++;
-                    lblSuccess.Text = $"{success}s";
+                    lblSuccess.Text = $"{success}";
                     isActiveBlock = false;
                 }
             }
@@ -78,6 +80,14 @@ namespace AIBot.Game.UC
             return rd.Next(10, 20);
         }
 
+        private void StressLevelOne_KeyDown(object sender, KeyEventArgs e)
+         {
+            if (e.KeyData == Keys.Space)
+            {
+                heroY -= 15;
+            }
+        }
+
         private void StressLevelOne_MouseClick(object sender, MouseEventArgs e)
         {
             heroY -= 15;
@@ -85,18 +95,18 @@ namespace AIBot.Game.UC
 
         private void tmrCount_Tick(object sender, EventArgs e)
         {
-            time++;
+            time--;
             lblTime.Text = $"{time}s";
-            if (time>=50)
+            if (time<=0)
             {
-                MessageBox.Show("Game finised");
+                tmrCount.Stop();
+                tmrBackgroundImage.Stop();
+                if (MessageBox.Show($"Your result summary success:{success},failed:{failed}. \n Click ok to save game result", "Game finised"
+                        , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.OK)
+                {
+                    MessageBox.Show("saved");   
+                }
             }
-        }
-
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-            tmrBackgroundImage.Start();
-            GameState = Enums.GameState.Prosess;
         }
     }
 }
