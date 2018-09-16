@@ -1,0 +1,327 @@
+﻿USE [AIBot]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 9/16/2018 4:58:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Answer]    Script Date: 9/16/2018 4:58:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Answer](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AnswerName] [varchar](200) NULL,
+	[Value] [int] NOT NULL,
+ CONSTRAINT [PK_Answer] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Question]    Script Date: 9/16/2018 4:58:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Question](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Order] [int] NOT NULL,
+	[QuestionName] [varchar](1000) NULL,
+	[StressType] [int] NOT NULL DEFAULT ((0)),
+	[QuestionType] [int] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_Question] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 9/16/2018 4:58:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[User](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Email] [varchar](20) NULL,
+	[Name] [varchar](20) NULL,
+	[Password] [varchar](50) NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[UserSession]    Script Date: 9/16/2018 4:58:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserSession](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[DateTime] [datetime2](7) NOT NULL,
+	[IsSessionComplete] [bit] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[AnxietyMarks] [decimal](18, 2) NOT NULL DEFAULT ((0.0)),
+	[DepressionMarks] [decimal](18, 2) NOT NULL DEFAULT ((0.0)),
+	[StressMarks] [decimal](18, 2) NOT NULL DEFAULT ((0.0)),
+	[SessionGuid] [uniqueidentifier] NOT NULL DEFAULT ('00000000-0000-0000-0000-000000000000'),
+	[StressType] [int] NULL,
+ CONSTRAINT [PK_UserSession] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[UserSessionAnswer]    Script Date: 9/16/2018 4:58:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[UserSessionAnswer](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MatchingAnswerId] [int] NOT NULL,
+	[QuestionId] [int] NOT NULL,
+	[UserAnswer] [varchar](500) NULL,
+	[UserSessionId] [int] NOT NULL,
+	[Value] [int] NOT NULL DEFAULT ((0)),
+	[MatchingPercentageSummery] [varchar](1000) NULL,
+ CONSTRAINT [PK_UserSessionAnswer] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[UserSessionGame]    Script Date: 9/16/2018 4:58:27 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserSessionGame](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Failed] [int] NOT NULL,
+	[GameId] [int] NOT NULL,
+	[SessionId] [uniqueidentifier] NOT NULL,
+	[Success] [int] NOT NULL,
+ CONSTRAINT [PK_UserSessionGame] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180825070643_Init', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180825070952_IncreaseQuestionSize', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180825071014_SeedData', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180825141349_AlterUserSessionAnswerTable', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180825141643_AlterUserSessionAnswerTableAddValueColom', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180825202901_AlterUserSessionAnswerTableAddValueColom2', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180908071408_QuestionType', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180908074312_AddSessionResultColomn', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180908074959_AddResultColomn', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180915203241_QuestionRefactor', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180916074418_AlterSessionTable', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180916103112_AddUserSessionGames', N'2.0.0-rtm-26452')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20180916105453_AddStressTypeToUserSession', N'2.0.0-rtm-26452')
+GO
+SET IDENTITY_INSERT [dbo].[Answer] ON 
+
+GO
+INSERT [dbo].[Answer] ([Id], [AnswerName], [Value]) VALUES (1, N'did not apply to me at all', 0)
+GO
+INSERT [dbo].[Answer] ([Id], [AnswerName], [Value]) VALUES (2, N'applied to me to some degree, or some of the time', 1)
+GO
+INSERT [dbo].[Answer] ([Id], [AnswerName], [Value]) VALUES (3, N'applied to me to a considerable degree or a good part of time', 2)
+GO
+INSERT [dbo].[Answer] ([Id], [AnswerName], [Value]) VALUES (4, N'applied to me to a considerable degree or a good part of time', 3)
+GO
+INSERT [dbo].[Answer] ([Id], [AnswerName], [Value]) VALUES (5, N'cannot found', 4)
+GO
+INSERT [dbo].[Answer] ([Id], [AnswerName], [Value]) VALUES (6, N' It is happened several times', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Answer] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Question] ON 
+
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (1, 0, N'Hi #name# ! Thanks for registering to mindhealer. I’m so excited to talk to you.
+                        You can consider me as your best friend and talk about yourself and how your life has been during the past week
+                        ', 0, 1)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (2, 1, N'Well start with getting to know each other and talk about your daily life and how the past week is has been.
+                        You can say anything to me without being judged
+                        ', 0, 1)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (3, 2, N'By the way I like your name Hirusha ? its (Unique, Uncommon, nice, sounds good…..)', 0, 1)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (4, 3, N'Oh Okay. I love it! (In situations like this, user could ask a question in return, chatbot should be able to identify it)', 0, 1)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (5, 4, N'So how are you doing these days? Anything special you’re working on or nothing at all?', 0, 1)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (6, 5, N'Statement should be depending on the positive ness or negative ness of user’s answer', 0, 1)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (7, 6, N'I can help you find a way to relax your mind if you let me!', 0, 1)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (8, 7, N'Champ! You remember any moments which you were unable to breathe effortlessly?', 3, 2)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (9, 8, N'Let’s see! Did you feel a dryness in your mouth during the past couple of days?', 1, 2)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (10, 9, N'I know you work hard. But didn’t you have any positive feelings flowing in your mind last week?', 2, 2)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (11, 10, N'Let’s see! Did you had any breathing difficulty recently? You have to be honest with you friend.', 1, 2)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (12, 11, N'So did you find it difficult to take the initiative for the work you are supposed to do?', 2, 2)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (14, 13, N'Alright! Do you think that you overreact to any situation last week?', 3, 2)
+GO
+INSERT [dbo].[Question] ([Id], [Order], [QuestionName], [StressType], [QuestionType]) VALUES (31, 29, N'The Conversation is Over. Thank you Your collaboration ', 0, 4)
+GO
+SET IDENTITY_INSERT [dbo].[Question] OFF
+GO
+SET IDENTITY_INSERT [dbo].[User] ON 
+
+GO
+INSERT [dbo].[User] ([Id], [Email], [Name], [Password]) VALUES (1, N'hirusha@gmail.com', N'Hirusha', N'123')
+GO
+INSERT [dbo].[User] ([Id], [Email], [Name], [Password]) VALUES (2, N'iamchamith@gmail.com', N'Chamith', N'123')
+GO
+SET IDENTITY_INSERT [dbo].[User] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserSession] ON 
+
+GO
+INSERT [dbo].[UserSession] ([Id], [DateTime], [IsSessionComplete], [UserId], [AnxietyMarks], [DepressionMarks], [StressMarks], [SessionGuid], [StressType]) VALUES (33, CAST(N'2018-09-16 09:19:38.3258531' AS DateTime2), 1, 1, CAST(66.67 AS Decimal(18, 2)), CAST(66.67 AS Decimal(18, 2)), CAST(66.67 AS Decimal(18, 2)), N'9c9d9b75-f8a1-47b1-a453-b995f7b1fe85', 1)
+GO
+INSERT [dbo].[UserSession] ([Id], [DateTime], [IsSessionComplete], [UserId], [AnxietyMarks], [DepressionMarks], [StressMarks], [SessionGuid], [StressType]) VALUES (34, CAST(N'2018-09-16 09:26:04.5303225' AS DateTime2), 1, 1, CAST(0.00 AS Decimal(18, 2)), CAST(33.33 AS Decimal(18, 2)), CAST(83.33 AS Decimal(18, 2)), N'24b683da-1159-4d78-ad62-37c3a1538287', 2)
+GO
+INSERT [dbo].[UserSession] ([Id], [DateTime], [IsSessionComplete], [UserId], [AnxietyMarks], [DepressionMarks], [StressMarks], [SessionGuid], [StressType]) VALUES (35, CAST(N'2018-09-16 09:30:35.3930598' AS DateTime2), 1, 1, CAST(66.67 AS Decimal(18, 2)), CAST(50.00 AS Decimal(18, 2)), CAST(66.67 AS Decimal(18, 2)), N'493d1cba-ae0a-420b-af33-ff566bb01274', 1)
+GO
+INSERT [dbo].[UserSession] ([Id], [DateTime], [IsSessionComplete], [UserId], [AnxietyMarks], [DepressionMarks], [StressMarks], [SessionGuid], [StressType]) VALUES (36, CAST(N'2018-09-16 09:40:26.2480903' AS DateTime2), 1, 1, CAST(16.67 AS Decimal(18, 2)), CAST(50.00 AS Decimal(18, 2)), CAST(66.67 AS Decimal(18, 2)), N'4fbff349-7623-44d1-be22-f866b48489b2', 1)
+GO
+SET IDENTITY_INSERT [dbo].[UserSession] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserSessionAnswer] ON 
+
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1078, 3, 7, N'fine', 33, 2, N'[{"answer":1,"similarity":0.007693940795176},{"answer":2,"similarity":0.0087877226794525},{"answer":3,"similarity":0.26216441295969},{"answer":4,"similarity":0.26216441295969},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1079, 3, 9, N'applied to me to a considerable degree or a good part of time', 33, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1080, 3, 8, N'applied to me to a considerable degree or a good part of time', 33, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1081, 3, 10, N'applied to me to a considerable degree or a good part of time', 33, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1082, 3, 11, N'applied to me to a considerable degree or a good part of time', 33, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1083, 3, 12, N'applied to me to a considerable degree or a good part of time', 33, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1084, 3, 14, N'applied to me to a considerable degree or a good part of time', 33, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1085, 5, 7, N'cannot found', 34, 4, N'[{"answer":1,"similarity":0.2},{"answer":2,"similarity":0.0},{"answer":3,"similarity":0.0},{"answer":4,"similarity":0.0},{"answer":5,"similarity":1.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1086, 2, 8, N'applied to me to some degree, or some of the time', 34, 1, N'[{"answer":1,"similarity":0.01068655099674},{"answer":2,"similarity":1.0},{"answer":3,"similarity":0.69896021427956},{"answer":4,"similarity":0.69896021427956},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1087, 1, 11, N'did not apply to me at all', 34, 0, N'[{"answer":1,"similarity":1.0},{"answer":2,"similarity":0.01068655099674},{"answer":3,"similarity":0.04189315722754},{"answer":4,"similarity":0.04189315722754},{"answer":5,"similarity":0.2}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1088, 2, 10, N' It is happened several times', 34, 1, N'[{"answer":1,"similarity":0.0012391872676675},{"answer":2,"similarity":0.094119227514484},{"answer":3,"similarity":0.067702585394144},{"answer":4,"similarity":0.067702585394144},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1089, 2, 12, N'applied to me to some degree, or some of the time', 34, 1, N'[{"answer":1,"similarity":0.01068655099674},{"answer":2,"similarity":1.0},{"answer":3,"similarity":0.69896021427956},{"answer":4,"similarity":0.69896021427956},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1090, 1, 9, N'did not apply to me at all', 34, 0, N'[{"answer":1,"similarity":1.0},{"answer":2,"similarity":0.01068655099674},{"answer":3,"similarity":0.04189315722754},{"answer":4,"similarity":0.04189315722754},{"answer":5,"similarity":0.2}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1091, 5, 14, N'cannot found', 34, 4, N'[{"answer":1,"similarity":0.2},{"answer":2,"similarity":0.0},{"answer":3,"similarity":0.0},{"answer":4,"similarity":0.0},{"answer":5,"similarity":1.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1092, 3, 6, N'applied to me to a considerable degree or a good part of time', 35, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1093, 2, 10, N' It is happened several times', 35, 1, N'[{"answer":1,"similarity":0.0012391872676675},{"answer":2,"similarity":0.094119227514484},{"answer":3,"similarity":0.067702585394144},{"answer":4,"similarity":0.067702585394144},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1094, 1, 8, N'did not apply to me at all', 35, 0, N'[{"answer":1,"similarity":1.0},{"answer":2,"similarity":0.01068655099674},{"answer":3,"similarity":0.04189315722754},{"answer":4,"similarity":0.04189315722754},{"answer":5,"similarity":0.2}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1095, 3, 12, N'applied to me to a considerable degree or a good part of time', 35, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1096, 5, 11, N'cannot found', 35, 4, N'[{"answer":1,"similarity":0.2},{"answer":2,"similarity":0.0},{"answer":3,"similarity":0.0},{"answer":4,"similarity":0.0},{"answer":5,"similarity":1.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1097, 1, 9, N'did not apply to me at all', 35, 0, N'[{"answer":1,"similarity":1.0},{"answer":2,"similarity":0.01068655099674},{"answer":3,"similarity":0.04189315722754},{"answer":4,"similarity":0.04189315722754},{"answer":5,"similarity":0.2}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1098, 5, 14, N'cannot found', 35, 4, N'[{"answer":1,"similarity":0.2},{"answer":2,"similarity":0.0},{"answer":3,"similarity":0.0},{"answer":4,"similarity":0.0},{"answer":5,"similarity":1.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1099, 5, 6, N'cannot found', 36, 4, N'[{"answer":1,"similarity":0.2},{"answer":2,"similarity":0.0},{"answer":3,"similarity":0.0},{"answer":4,"similarity":0.0},{"answer":5,"similarity":1.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1100, 2, 10, N'applied to me to some degree, or some of the time', 36, 1, N'[{"answer":1,"similarity":0.01068655099674},{"answer":2,"similarity":1.0},{"answer":3,"similarity":0.69896021427956},{"answer":4,"similarity":0.69896021427956},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1101, 2, 9, N' It is happened several times', 36, 1, N'[{"answer":1,"similarity":0.0012391872676675},{"answer":2,"similarity":0.094119227514484},{"answer":3,"similarity":0.067702585394144},{"answer":4,"similarity":0.067702585394144},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1102, 3, 12, N'applied to me to a considerable degree or a good part of time', 36, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1103, 1, 11, N'did not apply to me at all', 36, 0, N'[{"answer":1,"similarity":1.0},{"answer":2,"similarity":0.01068655099674},{"answer":3,"similarity":0.04189315722754},{"answer":4,"similarity":0.04189315722754},{"answer":5,"similarity":0.2}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1104, 3, 8, N'applied to me to a considerable degree or a good part of time', 36, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+INSERT [dbo].[UserSessionAnswer] ([Id], [MatchingAnswerId], [QuestionId], [UserAnswer], [UserSessionId], [Value], [MatchingPercentageSummery]) VALUES (1105, 3, 14, N'applied to me to a considerable degree or a good part of time', 36, 2, N'[{"answer":1,"similarity":0.04189315722754},{"answer":2,"similarity":0.69896021427956},{"answer":3,"similarity":1.0},{"answer":4,"similarity":1.0},{"answer":5,"similarity":0.0}]')
+GO
+SET IDENTITY_INSERT [dbo].[UserSessionAnswer] OFF
+GO
+ALTER TABLE [dbo].[UserSession]  WITH CHECK ADD  CONSTRAINT [FK_UserSession_User_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([Id])
+GO
+ALTER TABLE [dbo].[UserSession] CHECK CONSTRAINT [FK_UserSession_User_UserId]
+GO
+ALTER TABLE [dbo].[UserSessionAnswer]  WITH CHECK ADD  CONSTRAINT [FK_UserSessionAnswer_Answer_MatchingAnswerId] FOREIGN KEY([MatchingAnswerId])
+REFERENCES [dbo].[Answer] ([Id])
+GO
+ALTER TABLE [dbo].[UserSessionAnswer] CHECK CONSTRAINT [FK_UserSessionAnswer_Answer_MatchingAnswerId]
+GO
+ALTER TABLE [dbo].[UserSessionAnswer]  WITH CHECK ADD  CONSTRAINT [FK_UserSessionAnswer_Question_QuestionId] FOREIGN KEY([QuestionId])
+REFERENCES [dbo].[Question] ([Id])
+GO
+ALTER TABLE [dbo].[UserSessionAnswer] CHECK CONSTRAINT [FK_UserSessionAnswer_Question_QuestionId]
+GO
+ALTER TABLE [dbo].[UserSessionAnswer]  WITH CHECK ADD  CONSTRAINT [FK_UserSessionAnswer_UserSession_UserSessionId] FOREIGN KEY([UserSessionId])
+REFERENCES [dbo].[UserSession] ([Id])
+GO
+ALTER TABLE [dbo].[UserSessionAnswer] CHECK CONSTRAINT [FK_UserSessionAnswer_UserSession_UserSessionId]
+GO
