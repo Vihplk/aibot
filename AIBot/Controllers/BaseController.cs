@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AIBot.Core.Utility;
 using Microsoft.AspNetCore.Mvc;
+using AIBot.Core;
 
 namespace AIBot.Controllers
 {

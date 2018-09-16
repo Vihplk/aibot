@@ -6,7 +6,7 @@ namespace AIBot.Core.Service.Interface
 {
     public interface IBotService
     {
-        Task<QuestionDto> Read(int request, int userid);
+        Task<QuestionDto> Read(int userid, int sessionid, int index);
         Task GiveAnswer(UserAnswerDto request);
     }
 }

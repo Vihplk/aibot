@@ -8,15 +8,13 @@ using AIBot.Core.Dto.QuestionAndAnswer.Master;
 using AIBot.Core.Service.Interface;
 using AIBot.Core.Utility;
 using AIBot.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using unirest_net.http;
 
 namespace AIBot.Controllers
 {
     [Route("api/chat")]
-    public class ChatBotController : BaseController
+    public partial class ChatBotController : BaseController
     {
         private readonly IBotService _botService;
         private readonly IQuestionSessionService _questionSession;
@@ -25,12 +23,12 @@ namespace AIBot.Controllers
             _botService = botService;
             _questionSession = questionSession;
         }
-        [HttpGet,Route("questions/{id:int}")]
-        public async Task<IActionResult> ReadQuestion(int id)
+        [HttpGet,Route("questions/{sessionid:int}/{index:int}")]
+        public async Task<IActionResult> ReadQuestion(int sessionid,int index)
         {
             try
             {
-                var question = (await _botService.Read(id, UserId));
+                var question = (await _botService.Read(UserId, sessionid, index));
                 question.QuestionName = question.QuestionName.ApplyRegx(DisplayName);
                 return Ok(question);
             }
@@ -63,7 +61,8 @@ namespace AIBot.Controllers
                     request.MatchingPercentageSummary = mostSutable.Summary;
                     await _botService.GiveAnswer(request);
                 }
-                return await ReadQuestion(++request.QuestionId);
+
+                return await ReadQuestion(request.SessionId, request.Index);
             }
             catch (Exception e)
             {
@@ -71,57 +70,7 @@ namespace AIBot.Controllers
             }
         }
 
-        async Task<MatchAnswerDto> Compare(string compare, List<AnswerDto> comparewith)
-        {
-            compare = compare.Replace(" ", "+"); 
-            var responses = new List<TwinwordResponse>();
-            for (var i = 0; i < comparewith.Count-1; i++)
-            {
-                var item = comparewith[i];
-                var url = $@"{GlobalConfig.TwaipApiEndpoint}?text1={compare}&text2={item.AnswerName}";
-
-                using (HttpClient client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("X-Twaip-Key", GlobalConfig.TwaipKey);
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
-                    var json = await client.GetStringAsync(url);
-                    var response = JsonConvert.DeserializeObject<TwinwordResponse>(json);
-                    response.answerid = item.Id;
-                    responses.Add(response);
-                }
-            }
-            var max = responses.Max(p => p.similarity);
-            var matchinganswer = responses.First(p => p.similarity == max);
-            return new MatchAnswerDto
-            {
-                MatchingAnswerId = matchinganswer.answerid,
-                MatchingAnswerValue = comparewith.First(p => p.Id == matchinganswer.answerid).Value,
-                Summary = JsonConvert.SerializeObject(responses.Select(p => new
-                {
-                    answer = p.answerid,
-                    similarity = p.similarity
-                }))
-            };
-        }
-
-        async Task Compare(string compare,List<string> comparewith)
-        {
-            compare = compare.Replace(" ", "+");
-            comparewith.ForEach(p => p = p.Replace(" ", "+"));
-            foreach (var item in comparewith)
-            {
-                var url = $@"{GlobalConfig.TwaipApiEndpoint}?text1={compare}&text2={item}";
-
-                using (HttpClient client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("X-Twaip-Key", GlobalConfig.TwaipKey);
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
-                    var json = await client.GetStringAsync(url);
-                    var response = JsonConvert.DeserializeObject<TwinwordResponse>(json);
-                }
-            }
-        }
-
+   
         [HttpGet("compare")]
         public async Task<IActionResult> Compare(string compare, string comparewith)
         {

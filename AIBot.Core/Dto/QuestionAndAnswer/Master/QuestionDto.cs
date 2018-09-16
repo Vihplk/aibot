@@ -4,5 +4,6 @@
     { 
         public string QuestionName { get; set; }
         public int Order { get; set; }
+        public bool IsQuestion { get; set; }
     }
 }

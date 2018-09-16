@@ -45,31 +45,63 @@ $(document).ready(function () {
     function setSessions(values) {
         $("#sessions").data("kendoComboBox").setDataSource(values);
     }
-
  
-    function createChart2(e) {
+    function createChart(yaxe, stress,anix,depression) {
         $("#chart2").kendoChart({
             title: {
-                text: "Your Status with Time"
+                text: "Stess levels"
             },
-            dataSource: {
-                data: e
+            legend: {
+                visible: false
+            },
+            seriesDefaults: {
+                type: "bar"
             },
             series: [{
-                type: "line",
-                field: "key",
-                categoryField: "value"
-            }]
+                name: "Stress",
+                data: stress
+            }, {
+                name: "anix",
+                data: anix
+            }, {
+                name: "depression",
+                data: depression
+            }],
+            valueAxis: {
+                max: 100,
+                line: {
+                    visible: false
+                },
+                minorGridLines: {
+                    visible: true
+                },
+                labels: {
+                    rotation: "auto"
+                }
+            },
+            categoryAxis: {
+                categories: yaxe,
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            tooltip: {
+                visible: true,
+                template: "#= series.name #: #= value #"
+            }
         });
     }
     xhr('/api/sessions/graph', 'get', (e) => {
-        createChart2(e);
+        createChart(e.yaxe, e.stress, e.anix, e.depression);
     });
-
+    $("#cmbStessType").kendoComboBox({
+        dataSource: ["Anxiety", "Depression","Stress"],
+        value: "Anxiety"
+    });
 
     function forecast(searchby) {
 
-        xhr('/api/forecast/' + searchby, 'get', (e) => {
+        xhr('/api/forecast/' + searchby + '/' + $("#cmbStessType").data("kendoComboBox").value(), 'get', (e) => {
             var grid = $("#grid2").data("kendoGrid");
             grid.setDataSource(e.forecastList);
             $('#type').html(e.masterData.type);

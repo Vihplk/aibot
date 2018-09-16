@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
-    localStorage.setItem("baseurl", "http://localhost:65000");
+    localStorage.setItem("baseurl", "http://localhost:5500");
 
     $("#login").click(function () {
         $.ajax({
-            url: 'http://localhost:65000/api/security/login',
+            url: localStorage.getItem("baseurl") + '/api/security/login',
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             caher: false,

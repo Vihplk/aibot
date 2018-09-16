@@ -87,23 +87,18 @@ $(document).ready(function() {
 
 //-- Clear Chat
     resetChat();
-
-//-- Print Messages
-    //insertChat("me", "Hello Tom...", 0);
-    //insertChat("you", "Hi, Pablo", 1500);
-    //insertChat("me", "What would you like to talk about today?", 3500);
-    //insertChat("you", "Tell me a joke", 7000);
-    //insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
-    //insertChat("you", "LOL", 12000);
-
+ 
     function pushChat(answername) {
         $.ajax({
             url: localStorage.getItem("baseurl") + '/api/chat/answer',
             type: 'post',
             contentType: 'application/json; charset=utf-8',
             caher: false,
-            data: JSON.stringify({ SessionId: parseInt(localStorage.getItem("session")), QuestionId: qid, AnswerName: answername}),
+            data: JSON.stringify({
+                SessionId: parseInt(localStorage.getItem("session")),
+                Index: index, AnswerName: answername, QuestionId: qid}),
             success: function (data) {
+                index++;
                 qid = data.id;
                 insertChat("you", data.questionName, 1500);
             },
@@ -114,15 +109,17 @@ $(document).ready(function() {
     }
 
     var qid = 1;
+    var index = 1;
     function initChat() {
         $.ajax({
-            url: localStorage.getItem("baseurl") + '/api/chat/questions/' + qid,
+            url: localStorage.getItem("baseurl") + '/api/chat/questions/' + parseInt(localStorage.getItem("session")) + '/' + index,
             type: 'get',
             contentType: 'application/json; charset=utf-8',
             caher: false,
             data: null,
             success: function (data) {
                 insertChat("you", data.questionName, 1500);
+                index++;
             },
             error: function (e) {
                 alert('error');

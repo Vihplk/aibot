@@ -27,12 +27,17 @@ namespace AIBot.Controllers
             _forecasetService = forecasetService;
             _questionSessionService = questionSessionService;
         }
-        [HttpGet,Route("forecast/{forecasttype}")]
-        public async Task<IActionResult> Forecast(string forecasttype)
+        [HttpGet,Route("forecast/{forecasttype}/{stresstype}")]
+        public async Task<IActionResult> Forecast(string forecasttype,string stressType)
         {
             try
             {
-                var result = await _questionSessionService.GetResults(UserId);
+                Enums.StressType stessType = stressType.ToLower().StartsWith("a")
+                    ? Enums.StressType.Anxiety
+                    : stressType.ToLower().StartsWith("d")
+                        ? Enums.StressType.Depression
+                        : Enums.StressType.Stress;
+                 var result = await _questionSessionService.GetResults(UserId, stessType);
                 _forecasetService.SetType(forecasttype);
                 var forecastResponse = new ForecastingResponse();
                 switch (forecasttype)

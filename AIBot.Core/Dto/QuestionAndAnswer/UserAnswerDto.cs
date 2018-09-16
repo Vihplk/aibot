@@ -8,14 +8,20 @@
         public int Value { get; set; } = 0;
         public string MatchingPercentageSummary { get; set; }
         public int MatchingAnswerId { get; set; }
+        public int Index { get; set; }
         public bool IsQuestion()
         {
-            return QuestionId > 7;
+            if (Index <= GlobalConfig.QuestionLandingBoundIndex[1])
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool IsQuestionOver()
         {
-            return QuestionId >= 31;
+            return Index > GlobalConfig.QuestionEndIndex;
         }
     }
 }

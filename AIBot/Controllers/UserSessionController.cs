@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AIBot.Core.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +58,14 @@ namespace AIBot.Controllers
         {
             try
             {
-                return Ok(await _sessionService.GetResultGraph(UserId));
+                var resule = await _sessionService.GetResultGraph(UserId);
+                return Ok(new
+                {
+                    yaxe = resule.Select(p=>p.Date).ToList(),
+                    stress = resule.Select(p=>p.Stress).ToList(),
+                    anix = resule.Select(p => p.Anxiety).ToList(),
+                    depression = resule.Select(p => p.Depression).ToList(),
+                });
             }
             catch (Exception e)
             {

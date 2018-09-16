@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{991BAEB1-B732-45ED-8C11-F6EB11E1B403}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AIBot.Game</RootNamespace>
+    <AssemblyName>AIBot.Game</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globalconfig.cs" />
+    <Compile Include="Logic\Enums.cs" />
+    <Compile Include="Logic\Image.cs" />
+    <Compile Include="Logic\Sound.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BackgroundImage.cs" />
+    <Compile Include="Models\Block.cs" />
+    <Compile Include="Models\Hiro.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UC\Anxiety.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Anxiety.Designer.cs">
+      <DependentUpon>Anxiety.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\Depression.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Depression.Designer.cs">
+      <DependentUpon>Depression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\GameStart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\GameStart.Designer.cs">
+      <DependentUpon>GameStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\StressLevelOne.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\StressLevelOne.Designer.cs">
+      <DependentUpon>StressLevelOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\StressLevelThree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\StressLevelThree.Designer.cs">
+      <DependentUpon>StressLevelThree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\StressLevelTwo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\StressLevelTwo.Designer.cs">
+      <DependentUpon>StressLevelTwo.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UC\Anxiety.resx">
+      <DependentUpon>Anxiety.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\Depression.resx">
+      <DependentUpon>Depression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\GameStart.resx">
+      <DependentUpon>GameStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\StressLevelOne.resx">
+      <DependentUpon>StressLevelOne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\StressLevelThree.resx">
+      <DependentUpon>StressLevelThree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\StressLevelTwo.resx">
+      <DependentUpon>StressLevelTwo.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stresslevelonebackgroundimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stresslevelonebackgroundimage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tree4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tree3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tree2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stard.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\baloonblue.gif" />
+    <Content Include="Images\baloonbuckert.gif" />
+    <Content Include="Images\baloonred.gif" />
+    <Content Include="Images\baloonyellow.gif" />
+    <Content Include="Images\book.png" />
+    <Content Include="Images\boy.gif" />
+    <Content Include="Images\bucketblue.png" />
+    <Content Include="Images\bucketred.png" />
+    <Content Include="Images\bucketyello.png" />
+    <Content Include="Images\chocolat.png" />
+    <Content Include="Images\coke.png" />
+    <Content Include="Images\deleveryboy.png" />
+    <Content Include="Images\fruit.png" />
+    <Content Include="Images\hunger.png" />
+    <Content Include="Images\newspaper.png" />
+    <Content Include="Images\rice.png" />
+    <Content Include="Images\superman.gif" />
+    <Content Include="Images\supermanwin.gif" />
+    <Content Include="Images\tv.png" />
+    <Content Include="Images\water.png" />
+    <None Include="Resources\loginBackground.gif" />
+    <None Include="Resources\supermanwin.gif" />
+    <None Include="Resources\superman.gif" />
+    <None Include="Resources\superman.png" />
+    <Content Include="SoundClip\start.mp3" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

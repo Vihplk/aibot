@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AIBot.Core;
 using AIBot.Core.Domain.Master;
 using AIBot.Core.Dto.QuestionAndAnswer.Master;
 using AIBot.Core.Infrastructure;

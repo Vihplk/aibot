@@ -32,7 +32,6 @@ namespace AIBot.Core.Service.User
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 throw;
             }
         }

@@ -7,7 +7,6 @@ namespace AIBot
     {
         public static void Main(string[] args)
         {
-            AIBot.Core.GlobalConfig.ConnectionString = GlobalConfig.ConnectionString;
             BuildWebHost(args).Run();
         }
 

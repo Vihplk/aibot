@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AIBot.Core.Domain
@@ -8,8 +9,11 @@ namespace AIBot.Core.Domain
     {
         public int UserId { get; protected set; }
         public DateTime DateTime { get; protected set; } = DateTime.UtcNow;
-        public decimal Marks { get; protected set; }
+        public decimal AnxietyMarks { get; protected set; } = 0;
+        public decimal DepressionMarks { get; protected set; } = 0;
+        public decimal StressMarks { get; protected set; } = 0;
         public bool IsSessionComplete { get; protected set; }
+        public Guid SessionGuid { get; protected set; }
 
         #region relations
         [ForeignKey("UserId")]
@@ -20,9 +24,18 @@ namespace AIBot.Core.Domain
         {
             UserId = userid;
             DateTime = DateTime.UtcNow;
-            Marks = 0;
             IsSessionComplete = false;
+            SessionGuid=Guid.Empty;
             return this;
+        }
+
+        public void SetResults(decimal anxietyMarks, decimal depressionMarks,decimal stressMarks,Guid sessionGuid)
+        {
+            AnxietyMarks = anxietyMarks;
+            DepressionMarks = depressionMarks;
+            StressMarks = stressMarks;
+            IsSessionComplete = true;
+            SessionGuid = sessionGuid;
         }
     }
 }

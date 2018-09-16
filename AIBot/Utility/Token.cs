@@ -6,6 +6,7 @@ using System.Text;
 using AIBot.Core.Dto.Security;
 using Microsoft.IdentityModel.Tokens;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
+using AIBot.Core;
 
 namespace AIBot.Utility
 {
@@ -28,9 +29,9 @@ namespace AIBot.Utility
                 expires: DateTime.Now.AddMinutes(10),
                 claims: new List<Claim>()
                 {
-                    new Claim(GlobalConfig.Claims.Email, request.Email),
-                    new Claim(GlobalConfig.Claims.UserId, request.Id.ToString()),
-                    new Claim(GlobalConfig.Claims.Name, request.Name)
+                    new Claim("email", request.Email),
+                    new Claim("userid", request.Id.ToString()),
+                    new Claim("name", request.Name)
                 }
             );
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);

@@ -10,4 +10,13 @@ namespace AIBot.Core.Utility
         {
         }
     }
+    public class OverExam : Exception
+    {
+        public OverExam(string exception) : base(exception)
+        {
+        }
+        public OverExam() : this("record not found")
+        {
+        }
+    }
 }

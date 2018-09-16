@@ -15,7 +15,7 @@ namespace AIBot.Core.Infrastructure
 
         public AIBotDbContext()
         {
-            connectionString = "Data Source=DESKTOP-LE44UH9;Initial Catalog=AIBot;Integrated Security=True";
+            connectionString = GlobalConfig.ConnectionString;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
