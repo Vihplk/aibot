@@ -37,6 +37,17 @@
             this.pic8 = new System.Windows.Forms.PictureBox();
             this.pic3 = new System.Windows.Forms.PictureBox();
             this.pic6 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.picSel1 = new System.Windows.Forms.PictureBox();
+            this.picSel2 = new System.Windows.Forms.PictureBox();
+            this.picSel3 = new System.Windows.Forms.PictureBox();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.lblFaild = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblSuccess = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picHero)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic4)).BeginInit();
@@ -46,6 +57,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSel3)).BeginInit();
             this.SuspendLayout();
             // 
             // picHero
@@ -65,6 +79,7 @@
             this.pic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic1.TabIndex = 8;
             this.pic1.TabStop = false;
+            this.pic1.Click += new System.EventHandler(this.pic1_Click);
             // 
             // pic4
             // 
@@ -75,6 +90,7 @@
             this.pic4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic4.TabIndex = 9;
             this.pic4.TabStop = false;
+            this.pic4.Click += new System.EventHandler(this.pic4_Click);
             // 
             // pic2
             // 
@@ -85,6 +101,7 @@
             this.pic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic2.TabIndex = 10;
             this.pic2.TabStop = false;
+            this.pic2.Click += new System.EventHandler(this.pic2_Click);
             // 
             // pic5
             // 
@@ -95,6 +112,7 @@
             this.pic5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic5.TabIndex = 11;
             this.pic5.TabStop = false;
+            this.pic5.Click += new System.EventHandler(this.pic5_Click);
             // 
             // pic7
             // 
@@ -105,6 +123,7 @@
             this.pic7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic7.TabIndex = 12;
             this.pic7.TabStop = false;
+            this.pic7.Click += new System.EventHandler(this.pic7_Click);
             // 
             // pic8
             // 
@@ -116,6 +135,7 @@
             this.pic8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic8.TabIndex = 13;
             this.pic8.TabStop = false;
+            this.pic8.Click += new System.EventHandler(this.pic8_Click);
             // 
             // pic3
             // 
@@ -126,6 +146,7 @@
             this.pic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic3.TabIndex = 14;
             this.pic3.TabStop = false;
+            this.pic3.Click += new System.EventHandler(this.pic3_Click);
             // 
             // pic6
             // 
@@ -136,11 +157,127 @@
             this.pic6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic6.TabIndex = 15;
             this.pic6.TabStop = false;
+            this.pic6.Click += new System.EventHandler(this.pic6_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(48, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "TIME";
+            // 
+            // picSel1
+            // 
+            this.picSel1.Location = new System.Drawing.Point(56, 67);
+            this.picSel1.Name = "picSel1";
+            this.picSel1.Size = new System.Drawing.Size(143, 99);
+            this.picSel1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSel1.TabIndex = 17;
+            this.picSel1.TabStop = false;
+            // 
+            // picSel2
+            // 
+            this.picSel2.Location = new System.Drawing.Point(230, 67);
+            this.picSel2.Name = "picSel2";
+            this.picSel2.Size = new System.Drawing.Size(143, 99);
+            this.picSel2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSel2.TabIndex = 18;
+            this.picSel2.TabStop = false;
+            // 
+            // picSel3
+            // 
+            this.picSel3.Location = new System.Drawing.Point(411, 67);
+            this.picSel3.Name = "picSel3";
+            this.picSel3.Size = new System.Drawing.Size(143, 99);
+            this.picSel3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSel3.TabIndex = 19;
+            this.picSel3.TabStop = false;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Location = new System.Drawing.Point(127, 30);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(16, 13);
+            this.lblTime.TabIndex = 20;
+            this.lblTime.Text = "---";
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Location = new System.Drawing.Point(634, 93);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(75, 23);
+            this.btnCheck.TabIndex = 21;
+            this.btnCheck.Text = "CHECK";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
+            // 
+            // lblFaild
+            // 
+            this.lblFaild.AutoSize = true;
+            this.lblFaild.Location = new System.Drawing.Point(902, 95);
+            this.lblFaild.Name = "lblFaild";
+            this.lblFaild.Size = new System.Drawing.Size(13, 13);
+            this.lblFaild.TabIndex = 26;
+            this.lblFaild.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(825, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 17);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "FAILED";
+            // 
+            // lblSuccess
+            // 
+            this.lblSuccess.AutoSize = true;
+            this.lblSuccess.Location = new System.Drawing.Point(902, 50);
+            this.lblSuccess.Name = "lblSuccess";
+            this.lblSuccess.Size = new System.Drawing.Size(13, 13);
+            this.lblSuccess.TabIndex = 24;
+            this.lblSuccess.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(807, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 17);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "SUCCESS";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(1036, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 31);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "0";
             // 
             // Depression
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblFaild);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblSuccess);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnCheck);
+            this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.picSel3);
+            this.Controls.Add(this.picSel2);
+            this.Controls.Add(this.picSel1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pic6);
             this.Controls.Add(this.pic3);
             this.Controls.Add(this.pic8);
@@ -161,7 +298,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSel3)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -176,5 +317,16 @@
         private System.Windows.Forms.PictureBox pic8;
         private System.Windows.Forms.PictureBox pic3;
         private System.Windows.Forms.PictureBox pic6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox picSel1;
+        private System.Windows.Forms.PictureBox picSel2;
+        private System.Windows.Forms.PictureBox picSel3;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.Label lblFaild;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblSuccess;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
     }
 }

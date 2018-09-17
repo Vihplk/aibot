@@ -44,6 +44,7 @@
             // 
             // btnEnter
             // 
+            this.btnEnter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEnter.Location = new System.Drawing.Point(430, 114);
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.Size = new System.Drawing.Size(75, 23);
