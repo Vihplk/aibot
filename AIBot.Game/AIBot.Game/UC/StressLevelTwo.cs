@@ -14,10 +14,11 @@ namespace AIBot.Game.UC
     public partial class StressLevelTwo : UserControl
     {
         List<PictureBox> pictureBoxList = new List<PictureBox>();
-        private string pick;
         private List<string> images = null;
         private int success = 0, failed = 0;
         private int countDown = 50;
+        public List<string> pair = new List<string>();
+        private PictureBox selectedPictureBox = new PictureBox();
         public StressLevelTwo()
         {
             images = new List<string>()
@@ -36,7 +37,7 @@ namespace AIBot.Game.UC
         {
             picBucketBlue.SetImage("bucketblue.png");
             picBucketRed.SetImage("bucketred.png");
-            picBucketYello.SetImage("bucketyello.png");
+            picBucketYellow.SetImage("bucketyellow.png");
         }
 
         void GenBaloons()
@@ -51,8 +52,21 @@ namespace AIBot.Game.UC
                     name.Contains("blue") ? "blue" : "yellow";
                 pic.Location = new Point(x, 20);
                 pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                pic.Click += (s, e) => { pick = pic.Text; };
-                pic.SetImage(images[rd.Next(0, 3)]);
+                pic.Cursor = System.Windows.Forms.Cursors.Hand;
+                pic.Click += (s, e) =>
+                {
+                    if (pair.Count == 0)
+                    {
+                        pair.Add(pic.Text);
+                        lblYouSelect.Text = pic.Text.ToUpper();
+                        selectedPictureBox = pic;
+                    }
+                    else
+                    {
+                        MessageBox.Show("invalied oparation");
+                    }
+                };
+                pic.SetImage(name);
                 pictureBoxList.Add(pic);
                 x += 150;
             }
@@ -72,17 +86,16 @@ namespace AIBot.Game.UC
         {
             Drop(picBucketRed);
         }
-
-        private void picBucketYello_Click(object sender, EventArgs e)
+        private void picBucketYellow_Click(object sender, EventArgs e)
         {
-            Drop(picBucketYello);
+            Drop(picBucketYellow);
         }
-
         private void tmrCountDown_Tick(object sender, EventArgs e)
         {
             if (countDown<0)
             {
-                MessageBox.Show("game Over");
+                MessageBox.Show($"game is finished.you have {success} success and {failed} failier");
+                tmrCountDown.Stop();
             }
             countDown--;
             lblTime.Text = $"{countDown}s";
@@ -90,18 +103,49 @@ namespace AIBot.Game.UC
 
         void Drop(PictureBox pb)
         {
-            if (pb.Name.ToLower().Contains(pick))
+            if (pair.Count!=1)
+            {
+                MessageBox.Show("please select a baloon first");
+                return;
+            }
+            pair.Add(pb.Name.ToLower());
+            lblYouDrop.Text = GetColor(pb.Name).ToUpper();
+            if (pb.Name.ToLower().Contains(pair[0]))
             {
                 success++;
                 lblSuccess.Text = $"{success}";
+                Random rd = new Random();
+                var name = images[rd.Next(0, 3)];
+                selectedPictureBox.Text = name.Contains("red") ? "red" :
+                    name.Contains("blue") ? "blue" : "yellow";
+                selectedPictureBox.SetImage(name);
             }
             else
             {
                 failed++;
-                lblSuccess.Text = $"{failed}";
+                lblFaild.Text = $"{failed}";
             }
+            pair = new List<string>();
         }
 
-        
+      
+
+        string GetColor(string name)
+        {
+            if (name.Contains("Red"))
+            {
+                return "red";
+            }
+            else if (name.Contains("Blue"))
+            {
+                return "blue";
+            }
+            else if (name.Contains("Yello"))
+            {
+                return "yellow";
+            }
+
+            return "";
+        }
     }
 }

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.picBucketBlue = new System.Windows.Forms.PictureBox();
             this.picBucketRed = new System.Windows.Forms.PictureBox();
-            this.picBucketYello = new System.Windows.Forms.PictureBox();
+            this.picBucketYellow = new System.Windows.Forms.PictureBox();
             this.pnlBaloon = new System.Windows.Forms.Panel();
             this.lblFaild = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,14 +39,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.tmrCountDown = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblYouSelect = new System.Windows.Forms.Label();
+            this.lblYouDrop = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBucketBlue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBucketRed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBucketYello)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBucketYellow)).BeginInit();
             this.pnlBaloon.SuspendLayout();
             this.SuspendLayout();
             // 
             // picBucketBlue
             // 
+            this.picBucketBlue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picBucketBlue.Location = new System.Drawing.Point(153, 351);
             this.picBucketBlue.Name = "picBucketBlue";
             this.picBucketBlue.Size = new System.Drawing.Size(169, 165);
@@ -57,6 +62,7 @@
             // 
             // picBucketRed
             // 
+            this.picBucketRed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picBucketRed.Location = new System.Drawing.Point(402, 351);
             this.picBucketRed.Name = "picBucketRed";
             this.picBucketRed.Size = new System.Drawing.Size(169, 165);
@@ -65,15 +71,16 @@
             this.picBucketRed.TabStop = false;
             this.picBucketRed.Click += new System.EventHandler(this.picBucketRed_Click);
             // 
-            // picBucketYello
+            // picBucketYellow
             // 
-            this.picBucketYello.Location = new System.Drawing.Point(631, 351);
-            this.picBucketYello.Name = "picBucketYello";
-            this.picBucketYello.Size = new System.Drawing.Size(169, 165);
-            this.picBucketYello.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBucketYello.TabIndex = 2;
-            this.picBucketYello.TabStop = false;
-            this.picBucketYello.Click += new System.EventHandler(this.picBucketYello_Click);
+            this.picBucketYellow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBucketYellow.Location = new System.Drawing.Point(631, 351);
+            this.picBucketYellow.Name = "picBucketYellow";
+            this.picBucketYellow.Size = new System.Drawing.Size(169, 165);
+            this.picBucketYellow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBucketYellow.TabIndex = 2;
+            this.picBucketYellow.TabStop = false;
+            this.picBucketYellow.Click += new System.EventHandler(this.picBucketYellow_Click);
             // 
             // pnlBaloon
             // 
@@ -141,22 +148,67 @@
             this.tmrCountDown.Interval = 1000;
             this.tmrCountDown.Tick += new System.EventHandler(this.tmrCountDown_Tick);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(765, 186);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(120, 20);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "YOU SELECT";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(783, 236);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(102, 20);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "YOU DROP";
+            // 
+            // lblYouSelect
+            // 
+            this.lblYouSelect.AutoSize = true;
+            this.lblYouSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYouSelect.Location = new System.Drawing.Point(936, 191);
+            this.lblYouSelect.Name = "lblYouSelect";
+            this.lblYouSelect.Size = new System.Drawing.Size(27, 20);
+            this.lblYouSelect.TabIndex = 6;
+            this.lblYouSelect.Text = "---";
+            // 
+            // lblYouDrop
+            // 
+            this.lblYouDrop.AutoSize = true;
+            this.lblYouDrop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYouDrop.Location = new System.Drawing.Point(936, 241);
+            this.lblYouDrop.Name = "lblYouDrop";
+            this.lblYouDrop.Size = new System.Drawing.Size(27, 20);
+            this.lblYouDrop.TabIndex = 7;
+            this.lblYouDrop.Text = "---";
+            // 
             // StressLevelTwo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblYouDrop);
+            this.Controls.Add(this.lblYouSelect);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pnlBaloon);
-            this.Controls.Add(this.picBucketYello);
+            this.Controls.Add(this.picBucketYellow);
             this.Controls.Add(this.picBucketRed);
             this.Controls.Add(this.picBucketBlue);
             this.Name = "StressLevelTwo";
             this.Size = new System.Drawing.Size(1100, 550);
             ((System.ComponentModel.ISupportInitialize)(this.picBucketBlue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBucketRed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBucketYello)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBucketYellow)).EndInit();
             this.pnlBaloon.ResumeLayout(false);
             this.pnlBaloon.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -164,7 +216,7 @@
 
         private System.Windows.Forms.PictureBox picBucketBlue;
         private System.Windows.Forms.PictureBox picBucketRed;
-        private System.Windows.Forms.PictureBox picBucketYello;
+        private System.Windows.Forms.PictureBox picBucketYellow;
         private System.Windows.Forms.Panel pnlBaloon;
         private System.Windows.Forms.Label lblFaild;
         private System.Windows.Forms.Label label3;
@@ -172,5 +224,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer tmrCountDown;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblYouSelect;
+        private System.Windows.Forms.Label lblYouDrop;
     }
 }

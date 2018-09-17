@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\NewFolder\**" />
-    <Content Remove="wwwroot\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
-    <None Remove="wwwroot\NewFolder\**" />
+    <Content Remove="wwwroot\Dinusha\login.html" />
   </ItemGroup>
 
 
@@ -32,6 +29,10 @@
     <None Include="wwwroot\js\chat.js" />
     <None Include="wwwroot\js\login.js" />
     <None Include="wwwroot\js\stasis.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Dinusha\fonts\" />
   </ItemGroup>
 
 </Project>

@@ -77,5 +77,11 @@ namespace AIBot.Controllers
         {
             return (int) _sessionService.GetGame(token);
         }
+
+        [HttpGet, Route("sessions/game/{session}/{type}/{success}/{failed}")]
+        public void SaveGameScore(string session,int type,int success,int failed)
+        {
+
+        }
     }
 }

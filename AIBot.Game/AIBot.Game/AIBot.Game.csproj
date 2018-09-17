@@ -191,13 +191,14 @@
     <Content Include="Images\boy.gif" />
     <Content Include="Images\bucketblue.png" />
     <Content Include="Images\bucketred.png" />
-    <Content Include="Images\bucketyello.png" />
+    <Content Include="Images\bucketyellow.png" />
     <Content Include="Images\chocolat.png" />
     <Content Include="Images\coke.png" />
     <Content Include="Images\deleveryboy.png" />
     <Content Include="Images\fruit.png" />
     <Content Include="Images\hunger.png" />
     <Content Include="Images\newspaper.png" />
+    <Content Include="Images\no.png" />
     <Content Include="Images\rice.png" />
     <Content Include="Images\superman.gif" />
     <Content Include="Images\supermanwin.gif" />
