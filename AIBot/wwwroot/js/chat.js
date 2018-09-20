@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var me = {};
-    me.avatar = "../images/me.png";
+    me.avatar = "../Dinusha/img/me.jpg";
 
     var you = {};
     you.avatar = "https://cdn.iconscout.com/icon/premium/png-512-thumb/ai-63-407907.png";

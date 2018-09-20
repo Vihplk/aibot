@@ -4,11 +4,68 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
+
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Changa' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Assistant' rel='stylesheet'>
     <style>
+        .navbar {
+            background-color: #477be4 !important;
+        }
+
+        #pad li {
+            padding: 8px;
+        }
+
+        .navbar-header a {
+            padding-top: 20px;
+            font-family: 'Audiowide';
+            padding-left: 70px;
+            font-size: 40px;
+            color: white;
+        }
+
+        li:hover {
+            color:black;
+        }
+
+       #pad li a {
+            color: white;
+            font-family: 'Changa';
+            font-size: 18px;
+        }
+
+        .navbar1 {
+            background-color: white;
+            font-size: 17px;
+            font-family: "Javanese Text", sans-serif;
+            color: white;
+            font-weight: bold;
+        }
+
+        a p {
+            padding-top: 8px;
+            color: black;
+            font-family: "Javanese Text", sans-serif;
+            font-size: 14px;
+        }
+
+        .nav1 > li {
+            /*padding: 0.3em 0.4em;*/
+            display: block;
+        }
+
         .mytext {
             border: 0;
             padding: 10px;
             background: whitesmoke;
+            color:black;
+            font-weight:bold;
         }
 
         .text {
@@ -17,30 +74,35 @@
             flex-direction: column;
         }
 
-        .text > p:first-of-type {
-            width: 100%;
-            margin-top: 0;
-            margin-bottom: auto;
-            line-height: 13px;
-            font-size: 12px;
-        }
+            .text > p:first-of-type {
+                width: 100%;
+                margin-top: 0;
+                margin-bottom: auto;
+                line-height: 17px;
+                font-size: 15px;
+                font-weight:bold;
+            }
 
-        .text > p:last-of-type {
-            width: 100%;
-            text-align: right;
-            color: silver;
-            margin-bottom: -7px;
-            margin-top: auto;
-        }
+            .text > p:last-of-type {
+                width: 100%;
+                text-align: right;
+                color: orange;
+                margin-bottom: -7px;
+                margin-top: auto;
+            }
 
         .text-l {
             float: left;
             padding-right: 10px;
+           
+            
         }
 
         .text-r {
             float: right;
             padding-left: 10px;
+            
+            
         }
 
         .avatar {
@@ -72,17 +134,21 @@
 
         .frame {
             background: #e0e0de;
-            height: 450px;
+            height: 550px;
             overflow: hidden;
             padding: 0;
+            /*border:solid;
+            border-color:wheat;*/
+            
+            
         }
 
-        .frame > div:last-of-type {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-        }
+            .frame > div:last-of-type {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                display: flex;
+            }
 
         body > div > div > div:nth-child(2) > span {
             background: whitesmoke;
@@ -104,8 +170,9 @@
             bottom: 47px;
             display: flex;
             flex-direction: column;
-            top: 0;
+            top: 70px;
             overflow-y: scroll;
+           
         }
 
         .msj:before {
@@ -150,28 +217,87 @@
 
         :-moz-placeholder { /* Firefox 18- */
             color: #d4d4d4;
-        }  
+        }
+        h1 {
+            position:absolute;
+            top:40px;
+            text-align:center;
+        }
+        body {
+            background: url('../Dinusha/img/cloud.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        h2 {
+            background-color: #2A94D6;
+            font-size: 45px;
+            color: white;
+            font-family: 'Changa';
+            text-align:center;
+        }
+
     </style>
     <script src="../js/chat.js"></script>
 </head>
 <body>
-  &nbsp; &nbsp;  <h1> <a href="/view/dashboard.html"><<</a> Welcome to chatbot</h1>
-<div class="col-sm-6 col-sm-offset-2 frame">
-    <ul></ul>
-    <div>
-        <div class="msj-rta macro">
-            <div class="text text-r" style="background: whitesmoke !important">
-                <input class="mytext" placeholder="Type a message"/>
+
+    <div class="col-md-offset-3 col-sm-6 col-sm-offset-2 frame" style="margin-top:90px;">
+        <div style="padding: 0px;">
+           <h2>Ask Boo-Boo</h2>
+        </div>
+        <ul></ul>
+        <div>
+            <div class="msj-rta macro">
+                <div class="text text-r" style="background: whitesmoke !important">
+                    <input class="mytext" placeholder="Type a message" />
+                </div>
+
+            </div>
+            <div style="padding: 10px;">
+                <span class="glyphicon glyphicon-share-alt"></span>
             </div>
 
         </div>
-        <div style="padding: 10px;">
-            <span class="glyphicon glyphicon-share-alt"></span>
-        </div>
-      
     </div>
-</div>
-<br/>
-<script src="../js/chat.js"></script>
+    <br />
+    <!--<script src="../js/chat.js"></script>-->
+
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://mindhealer.tk/">Mind Healer</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <div id="pad">
+                    <ol class="nav navbar-nav navbar-right">
+                        <li><a href="http://mindhealer.tk/"> Home</a></li>
+                        <li><a href="/view/dashboard.html">Dashboard</a></li>
+                        <li><a href="https://mindhealer.000webhostapp.com/Research/contact.html">Contact</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ol>
+                </div>
+            </div>
+       </div>
+    </nav>
+
+
+
+
+    <div class="content3">
+        <nav class="navbar1 navbar-fixed-bottom">
+            <div class="container-fluid">
+                <!--<div class="navbar-header">-->
+                <a class="navbar-brand"><p>&#169; 2018 copyright Mind Healer. All Rights Reserved</p></a>
+            </div>
+            <!--</div>-->
+        </nav>
+    </div>
+
 </body>
 </html>
