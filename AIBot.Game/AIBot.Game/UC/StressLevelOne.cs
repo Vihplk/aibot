@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using AIBot.Game.Logic;
 using AIBot.Game.Models;
-using static AIBot.Game.Logic.Enums;
 
 namespace AIBot.Game.UC
 {
@@ -17,11 +16,9 @@ namespace AIBot.Game.UC
         private int heroX = 0, heroY = 0;
         private int time = 50;
         private int success = 0, failed = 0;
-        Parse parse = Parse.First;
         public StressLevelOne()
         {
             InitializeComponent();
-           
             picHero.SetImage("superman.gif");
             tmrBackgroundImage.Start();
             tmrCount.Start();
@@ -67,7 +64,7 @@ namespace AIBot.Game.UC
                 }
             }
 
-            heroY += 10;
+            heroY += 3;
             picHero.Location = new Point(heroX, heroY);
         }
 
@@ -80,15 +77,7 @@ namespace AIBot.Game.UC
         private int GetRandomSpeed()
         {
             Random rd = new Random();
-            if (parse == Parse.First)
-            {
-                return rd.Next(10, 20);
-            }
-            else
-            {
-                return rd.Next(50, 100);
-            }
-           
+            return rd.Next(10, 20);
         }
 
         private void StressLevelOne_KeyDown(object sender, KeyEventArgs e)
@@ -108,10 +97,6 @@ namespace AIBot.Game.UC
         {
             time--;
             lblTime.Text = $"{time}s";
-            if (time<= 20)
-            {
-                parse = Parse.Second;
-            }
             if (time<=0)
             {
                 tmrCount.Stop();
