@@ -17,5 +17,9 @@
             ANXIETY = 4,
             DEPRESSION = 5
         }
+        public enum Parse
+        {
+            First, Second
+        }
     }
 }
