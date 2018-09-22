@@ -19,7 +19,8 @@ namespace AIBot.Game.UC
         private int countDown = 50;
         public List<string> pair = new List<string>();
         private PictureBox selectedPictureBox = new PictureBox();
-        public StressLevelTwo()
+        private MainForm _mainForm;
+        public StressLevelTwo(MainForm mainForm)
         {
             images = new List<string>()
             {
@@ -28,6 +29,7 @@ namespace AIBot.Game.UC
                 "baloonyellow.gif"
             };
             InitializeComponent();
+            _mainForm = mainForm;
             Init();
             GenBaloons();
             tmrCountDown.Start();
@@ -38,6 +40,7 @@ namespace AIBot.Game.UC
             picBucketBlue.SetImage("bucketblue.png");
             picBucketRed.SetImage("bucketred.png");
             picBucketYellow.SetImage("bucketyellow.png");
+            picAction.SetImage("pause.png").Text = "pause";
         }
 
         void GenBaloons()
@@ -59,7 +62,9 @@ namespace AIBot.Game.UC
                     {
                         pair.Add(pic.Text);
                         lblYouSelect.Text = pic.Text.ToUpper();
+                        lblYouDrop.Text = string.Empty;
                         selectedPictureBox = pic;
+                        Console.Beep(700, 100);
                     }
                     else
                     {
@@ -108,6 +113,7 @@ namespace AIBot.Game.UC
                 MessageBox.Show("please select a baloon first");
                 return;
             }
+            Console.Beep(700, 100);
             pair.Add(pb.Name.ToLower());
             lblYouDrop.Text = GetColor(pb.Name).ToUpper();
             if (pb.Name.ToLower().Contains(pair[0]))
@@ -128,7 +134,33 @@ namespace AIBot.Game.UC
             pair = new List<string>();
         }
 
-      
+        private void pnlBaloon_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void picAction_Click(object sender, EventArgs e)
+        {
+            if (picAction.Text.StartsWith("pause"))
+            {
+                tmrCountDown.Stop(); 
+                picAction.SetImage("play.png").Text = "play";
+            }
+            else
+            {
+                tmrCountDown.Start(); 
+                picAction.SetImage("pause.png").Text = "pause";
+            }
+        }
+
+        private void picQuit_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show($"sure?", ""
+                    , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_1);
+            }
+        }
 
         string GetColor(string name)
         {

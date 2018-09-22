@@ -57,20 +57,23 @@
             // 
             // btnStart
             // 
-            this.btnStart.BackgroundImage = global::AIBot.Game.Properties.Resources.stard;
+            this.btnStart.BackColor = System.Drawing.Color.Transparent;
+            this.btnStart.BackgroundImage = global::AIBot.Game.Properties.Resources.start;
             this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStart.Location = new System.Drawing.Point(592, 149);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(278, 230);
             this.btnStart.TabIndex = 6;
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // GameStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::AIBot.Game.Properties.Resources.background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.picHero);
             this.Controls.Add(this.btnStart);

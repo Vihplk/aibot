@@ -15,6 +15,7 @@
         public static int[] QuestionLandingBoundIndex = new[] {1, 6};
         public static int QuestionEndIndex = 13;
         public static int TotalQuestions = 6;
+        public static double DefaultChatTreshold = 0.2;
         public static dynamic Claims = new
         {
             Email = "email",

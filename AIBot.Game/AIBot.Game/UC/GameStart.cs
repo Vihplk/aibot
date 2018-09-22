@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using AIBot.Game.Logic;
+using Image = System.Drawing.Image;
 
 namespace AIBot.Game.UC
 {
@@ -47,6 +48,7 @@ namespace AIBot.Game.UC
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            Console.Beep(700, 200);
             _mainForm.ChangeTabUserController(_gemeLevel,this);
         }
     }

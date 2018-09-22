@@ -6,6 +6,7 @@ using AIBot.Core.Dto.QuestionAndAnswer.Master;
 using AIBot.Model;
 using Newtonsoft.Json;
 using AIBot.Core;
+using AIBot.Core.Utility;
 
 namespace AIBot.Controllers
 {
@@ -31,6 +32,10 @@ namespace AIBot.Controllers
                 }
             }
             var max = responses.Max(p => p.similarity);
+            if (max < GlobalConfig.DefaultChatTreshold)
+            {
+                throw new AnswerCannotIdentity();
+            }
             var matchinganswer = responses.First(p => p.similarity == max);
             return new MatchAnswerDto
             {
