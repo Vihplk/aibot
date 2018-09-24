@@ -31,6 +31,7 @@
             this.lblName = new System.Windows.Forms.Label();
             this.picHero = new System.Windows.Forms.PictureBox();
             this.btnStart = new System.Windows.Forms.Button();
+            this.btnInfo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picHero)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,20 +58,37 @@
             // 
             // btnStart
             // 
-            this.btnStart.BackgroundImage = global::AIBot.Game.Properties.Resources.stard;
+            this.btnStart.BackColor = System.Drawing.Color.Transparent;
+            this.btnStart.BackgroundImage = global::AIBot.Game.Properties.Resources.start;
             this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStart.Location = new System.Drawing.Point(592, 149);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(278, 230);
             this.btnStart.TabIndex = 6;
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.BackColor = System.Drawing.Color.Transparent;
+            this.btnInfo.BackgroundImage = global::AIBot.Game.Properties.Resources.info;
+            this.btnInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInfo.Location = new System.Drawing.Point(1029, 12);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(52, 46);
+            this.btnInfo.TabIndex = 9;
+            this.btnInfo.UseVisualStyleBackColor = false;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
             // GameStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::AIBot.Game.Properties.Resources.background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.picHero);
             this.Controls.Add(this.btnStart);
@@ -87,5 +105,6 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.PictureBox picHero;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnInfo;
     }
 }

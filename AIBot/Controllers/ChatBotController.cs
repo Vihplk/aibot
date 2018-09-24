@@ -24,10 +24,14 @@ namespace AIBot.Controllers
             _questionSession = questionSession;
         }
         [HttpGet,Route("questions/{sessionid:int}/{index:int}")]
-        public async Task<IActionResult> ReadQuestion(int sessionid,int index)
+        public async Task<IActionResult> ReadQuestion(int sessionid,int index,bool isRepeat=false)
         {
             try
             {
+                if (isRepeat)
+                {
+                    return BadRequest("cannot identify the answer");
+                }
                 var question = (await _botService.Read(UserId, sessionid, index));
                 question.QuestionName = question.QuestionName.ApplyRegx(DisplayName);
                 return Ok(question);
@@ -51,19 +55,19 @@ namespace AIBot.Controllers
         {
             try
             {
-                if (request.IsQuestionOver())
-                {
-                    return Ok(new QuestionDto
-                    {
-                        Id = 32,
-                        Order = 0,
-                        QuestionName = "Question Are Over"
-                    });
-                }
                 if (request.IsQuestion())
                 {
                     var possibleSysAnswers = await _questionSession.GetAllPossibleSystemAnswers();
-                    var mostSutable = await Compare(request.AnswerName, possibleSysAnswers);
+                    MatchAnswerDto mostSutable;
+                    try
+                    {
+                        mostSutable = await Compare(request.AnswerName, possibleSysAnswers);
+                    }
+                    catch (Exception e)
+                    {
+                        return await ReadQuestion(request.SessionId, request.Index, true);
+                    }
+
                     request.Value = mostSutable.MatchingAnswerValue;
                     request.MatchingAnswerId = mostSutable.MatchingAnswerId;
                     request.MatchingPercentageSummary = mostSutable.Summary;

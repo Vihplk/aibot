@@ -33,11 +33,14 @@
             this.picBucketRed = new System.Windows.Forms.PictureBox();
             this.picBucketYellow = new System.Windows.Forms.PictureBox();
             this.pnlBaloon = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.picQuit = new System.Windows.Forms.PictureBox();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.picAction = new System.Windows.Forms.PictureBox();
+            this.lblSuccess = new System.Windows.Forms.Label();
             this.lblFaild = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblSuccess = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblTime = new System.Windows.Forms.Label();
             this.tmrCountDown = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,6 +50,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBucketRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBucketYellow)).BeginInit();
             this.pnlBaloon.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picQuit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAction)).BeginInit();
             this.SuspendLayout();
             // 
             // picBucketBlue
@@ -84,64 +90,101 @@
             // 
             // pnlBaloon
             // 
-            this.pnlBaloon.Controls.Add(this.lblFaild);
-            this.pnlBaloon.Controls.Add(this.label3);
-            this.pnlBaloon.Controls.Add(this.lblSuccess);
-            this.pnlBaloon.Controls.Add(this.label1);
-            this.pnlBaloon.Controls.Add(this.lblTime);
+            this.pnlBaloon.BackColor = System.Drawing.Color.Transparent;
+            this.pnlBaloon.Controls.Add(this.groupBox1);
             this.pnlBaloon.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBaloon.Location = new System.Drawing.Point(0, 0);
             this.pnlBaloon.Name = "pnlBaloon";
             this.pnlBaloon.Size = new System.Drawing.Size(1100, 127);
             this.pnlBaloon.TabIndex = 3;
+            this.pnlBaloon.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBaloon_Paint);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.picQuit);
+            this.groupBox1.Controls.Add(this.lblTime);
+            this.groupBox1.Controls.Add(this.picAction);
+            this.groupBox1.Controls.Add(this.lblSuccess);
+            this.groupBox1.Controls.Add(this.lblFaild);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Location = new System.Drawing.Point(731, 15);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(354, 100);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "ACTIONS";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(32, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "SUCCESS";
+            // 
+            // picQuit
+            // 
+            this.picQuit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picQuit.Image = global::AIBot.Game.Properties.Resources.quit;
+            this.picQuit.Location = new System.Drawing.Point(309, 38);
+            this.picQuit.Name = "picQuit";
+            this.picQuit.Size = new System.Drawing.Size(39, 31);
+            this.picQuit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picQuit.TabIndex = 10;
+            this.picQuit.TabStop = false;
+            this.picQuit.Click += new System.EventHandler(this.picQuit_Click);
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(159, 38);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(29, 31);
+            this.lblTime.TabIndex = 4;
+            this.lblTime.Text = "0";
+            // 
+            // picAction
+            // 
+            this.picAction.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picAction.Location = new System.Drawing.Point(236, 38);
+            this.picAction.Name = "picAction";
+            this.picAction.Size = new System.Drawing.Size(39, 31);
+            this.picAction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picAction.TabIndex = 9;
+            this.picAction.TabStop = false;
+            this.picAction.Click += new System.EventHandler(this.picAction_Click);
+            // 
+            // lblSuccess
+            // 
+            this.lblSuccess.AutoSize = true;
+            this.lblSuccess.Location = new System.Drawing.Point(127, 29);
+            this.lblSuccess.Name = "lblSuccess";
+            this.lblSuccess.Size = new System.Drawing.Size(13, 13);
+            this.lblSuccess.TabIndex = 6;
+            this.lblSuccess.Text = "0";
             // 
             // lblFaild
             // 
             this.lblFaild.AutoSize = true;
-            this.lblFaild.Location = new System.Drawing.Point(989, 75);
+            this.lblFaild.Location = new System.Drawing.Point(127, 74);
             this.lblFaild.Name = "lblFaild";
             this.lblFaild.Size = new System.Drawing.Size(13, 13);
-            this.lblFaild.TabIndex = 13;
+            this.lblFaild.TabIndex = 8;
             this.lblFaild.Text = "0";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(912, 73);
+            this.label3.Location = new System.Drawing.Point(50, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 17);
-            this.label3.TabIndex = 12;
+            this.label3.TabIndex = 7;
             this.label3.Text = "FAILED";
-            // 
-            // lblSuccess
-            // 
-            this.lblSuccess.AutoSize = true;
-            this.lblSuccess.Location = new System.Drawing.Point(989, 30);
-            this.lblSuccess.Name = "lblSuccess";
-            this.lblSuccess.Size = new System.Drawing.Size(13, 13);
-            this.lblSuccess.TabIndex = 11;
-            this.lblSuccess.Text = "0";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(894, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 17);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "SUCCESS";
-            // 
-            // lblTime
-            // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(1041, 30);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(29, 31);
-            this.lblTime.TabIndex = 9;
-            this.lblTime.Text = "0";
             // 
             // tmrCountDown
             // 
@@ -192,6 +235,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::AIBot.Game.Properties.Resources.stresstwowallpaper;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.lblYouDrop);
             this.Controls.Add(this.lblYouSelect);
             this.Controls.Add(this.label4);
@@ -206,7 +251,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBucketRed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBucketYellow)).EndInit();
             this.pnlBaloon.ResumeLayout(false);
-            this.pnlBaloon.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picQuit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAction)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,15 +266,18 @@
         private System.Windows.Forms.PictureBox picBucketRed;
         private System.Windows.Forms.PictureBox picBucketYellow;
         private System.Windows.Forms.Panel pnlBaloon;
-        private System.Windows.Forms.Label lblFaild;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblSuccess;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer tmrCountDown;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblYouSelect;
         private System.Windows.Forms.Label lblYouDrop;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox picQuit;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.PictureBox picAction;
+        private System.Windows.Forms.Label lblSuccess;
+        private System.Windows.Forms.Label lblFaild;
+        private System.Windows.Forms.Label label3;
     }
 }

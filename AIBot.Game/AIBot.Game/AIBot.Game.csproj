@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,6 +78,12 @@
     </Compile>
     <Compile Include="UC\Depression.Designer.cs">
       <DependentUpon>Depression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\GameNotAuthorized.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\GameNotAuthorized.Designer.cs">
+      <DependentUpon>GameNotAuthorized.cs</DependentUpon>
     </Compile>
     <Compile Include="UC\GameStart.cs">
       <SubType>UserControl</SubType>
@@ -124,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Depression.resx">
       <DependentUpon>Depression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\GameNotAuthorized.resx">
+      <DependentUpon>GameNotAuthorized.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\GameStart.resx">
       <DependentUpon>GameStart.cs</DependentUpon>
@@ -199,6 +209,8 @@
     <Content Include="Images\hunger.png" />
     <Content Include="Images\newspaper.png" />
     <Content Include="Images\no.png" />
+    <Content Include="Images\pause.png" />
+    <Content Include="Images\play.png" />
     <Content Include="Images\rice.png" />
     <Content Include="Images\superman.gif" />
     <Content Include="Images\supermanwin.gif" />
@@ -208,6 +220,14 @@
     <None Include="Resources\supermanwin.gif" />
     <None Include="Resources\superman.gif" />
     <None Include="Resources\superman.png" />
+    <None Include="Resources\if_youtube_291691.png" />
+    <None Include="Resources\background.jpg" />
+    <None Include="Resources\start.png" />
+    <None Include="Resources\quit.png" />
+    <None Include="Resources\stresstwowallpaper.jpg" />
+    <None Include="Resources\unauthezied.png" />
+    <None Include="Resources\depression.jpg" />
+    <None Include="Resources\info.png" />
     <Content Include="SoundClip\start.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

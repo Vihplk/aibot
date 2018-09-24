@@ -10,7 +10,19 @@ $(document).ready(function () {
             { field: "question" },
             { field: "userAnswer" },
             { field: "summery" },
-            { field: "value" },
+            { field: "value" }
+        ],
+        dataSource: []
+    });
+    $("#gridGameResult").kendoGrid({
+        selectable: "multiple cell",
+        allowCopy: true,
+        columns: [
+            { field: "gameType" },
+            { field: "attempt" },
+            { field: "success" },
+            { field: "failed" },
+            { field: "percentage" }
         ],
         dataSource: []
     });
@@ -38,6 +50,10 @@ $(document).ready(function () {
             xhr('/api/sessions/' + e.dataItem.key, 'get', (e) => {
                 var grid = $("#grid").data("kendoGrid");
                 grid.setDataSource(e);
+            });
+            xhr('/api/sessions/game/score/' + e.dataItem.key, 'get', (e) => {
+                var grid2 = $("#gridGameResult").data("kendoGrid");
+                grid2.setDataSource(e);
             });
         }
     });

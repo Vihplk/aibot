@@ -19,4 +19,13 @@ namespace AIBot.Core.Utility
         {
         }
     }
+    public class AnswerCannotIdentity : Exception
+    {
+        public AnswerCannotIdentity(string exception) : base(exception)
+        {
+        }
+        public AnswerCannotIdentity() : this("record not found")
+        {
+        }
+    }
 }

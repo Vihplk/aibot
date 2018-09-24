@@ -81,7 +81,13 @@ namespace AIBot.Controllers
         [HttpGet, Route("sessions/game/{session}/{type}/{success}/{failed}")]
         public void SaveGameScore(string session,int type,int success,int failed)
         {
+            _sessionService.SaveGameScore(new Guid(session), type, success, failed);
+        }
 
+        [HttpGet, Route("sessions/game/score/{session}")]
+        public async Task<IActionResult> GetGameScore(int session)
+        {
+           return Ok(await _sessionService.GetGameResult(session));
         }
     }
 }

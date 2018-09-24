@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using AIBot.Game.Logic;
 using AIBot.Game.Models;
+using AIBot.Game.Utility;
 
 namespace AIBot.Game.UC
 {
@@ -16,10 +17,13 @@ namespace AIBot.Game.UC
         private int heroX = 0, heroY = 0;
         private int time = 50;
         private int success = 0, failed = 0;
-        public StressLevelOne()
+        private MainForm _mainForm;
+        public StressLevelOne(MainForm mainForm)
         {
             InitializeComponent();
+            _mainForm = mainForm;
             picHero.SetImage("superman.gif");
+            picAction.SetImage("pause.png").Text = "pause";
             tmrBackgroundImage.Start();
             tmrCount.Start();
         }
@@ -53,7 +57,7 @@ namespace AIBot.Game.UC
                     lblFaild.Text = $"{failed}";
                     activeBlock.RemovePicture(this.Width);
                     isActiveBlock = false;
-                    Console.Beep(226,1);
+                    Console.Beep(226,500);
                 }
                 if (activeBlock.IsWent())
                 {
@@ -65,6 +69,10 @@ namespace AIBot.Game.UC
             }
 
             heroY += 3;
+            if (heroY >= this.Height)
+            {
+                heroY = this.Height;
+            }
             picHero.Location = new Point(heroX, heroY);
         }
 
@@ -86,6 +94,36 @@ namespace AIBot.Game.UC
             {
                 heroY -= 15;
             }
+             if (heroY < 0)
+             {
+                 heroY = 0;
+             }
+             Console.Beep(700, 100);
+         }
+
+        private void picAction_Click(object sender, EventArgs e)
+        {
+            if (picAction.Text.StartsWith("pause"))
+            {
+                tmrCount.Stop();
+                tmrBackgroundImage.Stop();
+                picAction.SetImage("play.png").Text = "play";
+            }
+            else
+            {
+                tmrCount.Start();
+                tmrBackgroundImage.Start();
+                picAction.SetImage("pause.png").Text = "pause";
+            }
+        }
+
+        private void picQuit_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show($"sure?", ""
+                    , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_1);
+            }
         }
 
         private void StressLevelOne_MouseClick(object sender, MouseEventArgs e)
@@ -102,11 +140,25 @@ namespace AIBot.Game.UC
                 tmrCount.Stop();
                 tmrBackgroundImage.Stop();
                 if (MessageBox.Show($"Your result summary success:{success},failed:{failed}. \n Click ok to save game result", "Game finised"
-                        , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.OK)
+                        , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    MessageBox.Show("saved");   
+                    SubmitResult();
+                }
+                else
+                {
+                    _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_1);
                 }
             }
         }
+
+        private void SubmitResult()
+        {
+
+            var response =
+                HttpRequester.Get(
+                    $"{Globalconfig.ApiEndPoint}/api/sessions/game/{Globalconfig.SessionId}/{(int) Enums.StressLevel.STRESS_LEVEL_1}/{success}/{failed}");
+            _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_1);
+        }
+
     }
 }
