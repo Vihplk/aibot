@@ -30,10 +30,7 @@ namespace AIBot.Controllers
             {
                 if (isRepeat)
                 {
-                    return Ok(new QuestionDto
-                    {
-                      QuestionName  = "Canot identity the answewer."
-                    });
+                    return BadRequest("cannot identify the answer");
                 }
                 var question = (await _botService.Read(UserId, sessionid, index));
                 question.QuestionName = question.QuestionName.ApplyRegx(DisplayName);
@@ -58,15 +55,6 @@ namespace AIBot.Controllers
         {
             try
             {
-                if (request.IsQuestionOver())
-                {
-                    return Ok(new QuestionDto
-                    {
-                        Id = 32,
-                        Order = 0,
-                        QuestionName = "Question Are Over"
-                    });
-                }
                 if (request.IsQuestion())
                 {
                     var possibleSysAnswers = await _questionSession.GetAllPossibleSystemAnswers();

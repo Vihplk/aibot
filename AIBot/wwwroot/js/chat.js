@@ -103,7 +103,11 @@ $(document).ready(function() {
                 insertChat("you", data.questionName, 1500);
             },
             error: function (e) {
-                alert('error');
+                if (e.status==400) {
+                    insertChat("you",'Sorry I cannot Identify your answer. Please tell it again ', 1500);
+                } else {
+                    alert('error'); 
+                }
             }
         });
     }
@@ -118,8 +122,9 @@ $(document).ready(function() {
             caher: false,
             data: null,
             success: function (data) {
-                insertChat("you", data.questionName, 1500);
                 index++;
+                insertChat("you", data.questionName, 1500);
+             
             },
             error: function (e) {
                 alert('error');

@@ -227,6 +227,7 @@
     <None Include="Resources\stresstwowallpaper.jpg" />
     <None Include="Resources\unauthezied.png" />
     <None Include="Resources\depression.jpg" />
+    <None Include="Resources\info.png" />
     <Content Include="SoundClip\start.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
