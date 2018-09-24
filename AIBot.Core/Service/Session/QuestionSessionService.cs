@@ -176,7 +176,7 @@ namespace AIBot.Core.Service.Session
                     {
                         Attempt = id++,
                         Failed = item2.Failed,
-                        Success = item2.Failed,
+                        Success = item2.Success,
                         GameType = ((Enums.Game)item2.GameId).ToString(),
                         Percentage = p
                     });
