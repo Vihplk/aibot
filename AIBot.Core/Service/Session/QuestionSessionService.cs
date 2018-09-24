@@ -31,12 +31,12 @@ namespace AIBot.Core.Service.Session
             return session.Id;
         }
 
-        public async Task<List<KeyValuePair<int, DateTime>>> GetAllSession(int userid)
+        public async Task<List<KeyValuePair<int, string>>> GetAllSession(int userid)
         {
             return (await (_unitOfWork.UserSessionRepository.TableAsNoTracking
-                        .Where(p => p.UserId == userid && p.IsSessionComplete).Select(p => new {p.Id, p.DateTime}))
+                        .Where(p => p.UserId == userid && p.IsSessionComplete).Select(p => new {p.Id, p.DateTime,p.StressType}))
                     .OrderByDescending(p => p.Id)
-                    .ToListAsync()).Select(p => new KeyValuePair<int, DateTime>(p.Id, p.DateTime))
+                    .ToListAsync()).Select(p => new KeyValuePair<int, string>(p.Id, $"{p.DateTime}-({((Enums.Game)p.StressType).ToString()})"))
                 .ToList();
         }
 
@@ -146,6 +146,43 @@ namespace AIBot.Core.Service.Session
                     max < 66.7m ? Enums.Game.StressTwo : Enums.Game.StresThree;
             }
             return gameState;
+        }
+
+        public void SaveGameScore(Guid sessionid, int gameid, int success, int failed)
+        {
+             _unitOfWork.UserSessionGameRepository.Insert(new UserSessionGame(sessionid, gameid, success, failed));
+
+        }
+
+        public async Task<List<GameViewResult>> GetGameResult(int sessionid)
+        {
+            var result = await (from userSession in _unitOfWork.UserSessionRepository.TableAsNoTracking
+                    join userSessionGame in _unitOfWork.UserSessionGameRepository.TableAsNoTracking on userSession
+                        .SessionGuid equals userSessionGame.SessionId
+                    where userSession.Id == sessionid
+                    select new {userSessionGame.Id, userSessionGame.Success, userSessionGame.Failed,userSessionGame.GameId})
+                .ToListAsync();
+
+            var gamesType = result.Select(p => p.GameId).Distinct().OrderBy(p => p);
+            var fresult = new List<GameViewResult>();
+            foreach (var item in gamesType)
+            {
+                var g = result.Where(p => p.GameId == item).OrderBy(p => p.Id).ToList();
+                var id = 1;
+                foreach (var item2 in g)
+                {
+                    var p = item2.Success * 100 / (item2.Failed + item2.Success);
+                    fresult.Add(new GameViewResult
+                    {
+                        Attempt = id++,
+                        Failed = item2.Failed,
+                        Success = item2.Failed,
+                        GameType = ((Enums.Game)item2.GameId).ToString(),
+                        Percentage = p
+                    });
+                }
+            }
+            return fresult;
         }
     }
 }

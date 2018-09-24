@@ -24,7 +24,7 @@ namespace AIBot.Core.Utility
 
         public enum Game
         {
-            StressOne,
+            StressOne=1,
             StressTwo,
             StresThree,
             Anx,

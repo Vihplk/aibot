@@ -8,9 +8,12 @@ namespace AIBot.Game
     public partial class MainForm : Form
     {
         private Enums.StressLevel _stressLevel;
-        public MainForm(Enums.StressLevel stressLevel)
+        private FrmLogin _login;
+        public MainForm(Enums.StressLevel stressLevel, FrmLogin login)
         {
             InitializeComponent();
+            _login = login;
+            lblSession.Text = Globalconfig.SessionId;
             _stressLevel = stressLevel;
             tabPage1.Controls.Add(new GameNotAuthorized());
             tabPage2.Controls.Add(new GameNotAuthorized());
@@ -121,6 +124,12 @@ namespace AIBot.Game
                 default:
                     throw new ArgumentException();
             }
+        }
+ 
+        private void logoutToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            _login.Show();
+            this.Close();
         }
     }
 }

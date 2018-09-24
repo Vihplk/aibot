@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AIBot.Game.Logic;
+using AIBot.Game.Utility;
 
 namespace AIBot.Game.UC
 {
@@ -99,8 +100,16 @@ namespace AIBot.Game.UC
         {
             if (countDown<0)
             {
-                MessageBox.Show($"game is finished.you have {success} success and {failed} failier");
                 tmrCountDown.Stop();
+                if (MessageBox.Show($"Your result summary success:{success},failed:{failed}. \n Click ok to save game result", "Game finised"
+                        , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    SubmitResult();
+                }
+                else
+                {
+                    _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_2);
+                } 
             }
             countDown--;
             lblTime.Text = $"{countDown}s";
@@ -158,7 +167,7 @@ namespace AIBot.Game.UC
             if (MessageBox.Show($"sure?", ""
                     , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_1);
+                _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_2);
             }
         }
 
@@ -178,6 +187,14 @@ namespace AIBot.Game.UC
             }
 
             return "";
+        }
+        private void SubmitResult()
+        {
+
+            var response =
+                HttpRequester.Get(
+                    $"{Globalconfig.ApiEndPoint}/api/sessions/game/{Globalconfig.SessionId}/{(int)Enums.StressLevel.STRESS_LEVEL_2}/{success}/{failed}");
+            _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_2);
         }
     }
 }

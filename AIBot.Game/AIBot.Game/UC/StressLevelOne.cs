@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using AIBot.Game.Logic;
 using AIBot.Game.Models;
+using AIBot.Game.Utility;
 
 namespace AIBot.Game.UC
 {
@@ -141,7 +142,7 @@ namespace AIBot.Game.UC
                 if (MessageBox.Show($"Your result summary success:{success},failed:{failed}. \n Click ok to save game result", "Game finised"
                         , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    MessageBox.Show("saved");   
+                    SubmitResult();
                 }
                 else
                 {
@@ -149,6 +150,15 @@ namespace AIBot.Game.UC
                 }
             }
         }
-       
+
+        private void SubmitResult()
+        {
+
+            var response =
+                HttpRequester.Get(
+                    $"{Globalconfig.ApiEndPoint}/api/sessions/game/{Globalconfig.SessionId}/{(int) Enums.StressLevel.STRESS_LEVEL_1}/{success}/{failed}");
+            _mainForm.BackToHome(Enums.StressLevel.STRESS_LEVEL_1);
+        }
+
     }
 }
