@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AIBot.Core;
 using AIBot.Core.Dto.QuestionAndAnswer;
 using AIBot.Core.Dto.QuestionAndAnswer.Master;
 using AIBot.Core.Service.Interface;
@@ -93,6 +94,11 @@ namespace AIBot.Controllers
                     var questions = await _userRandomQuestionService.ReadRandomQuestionAnswer();
                     var result = await Compare(question, questions.Select(p => p.PossibleQuestion).ToList());
                     systemAnswer = questions.First(p => p.PossibleQuestion == result).PossibleAnswer + ".";
+                }
+                if (!String.IsNullOrEmpty(extra))
+                {
+                    var extraResult = Soundex.MatchingWord(extra);
+                    _questionSession.SaveSessionSymptomes(request.SessionId,extraResult);
                 }
 
                 #endregion

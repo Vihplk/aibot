@@ -6,6 +6,7 @@ using AIBot.Core.Dto.QuestionAndAnswer;
 using AIBot.Core.Dto.QuestionAndAnswer.Master;
 using AIBot.Core.Dto.ViewResult;
 using AIBot.Core.Utility;
+using static AIBot.Core.Utility.Enums;
 
 namespace AIBot.Core.Service.Interface
 {
@@ -21,5 +22,9 @@ namespace AIBot.Core.Service.Interface
         //game
         void SaveGameScore(Guid sessionid,int gameid,int success,int failed);
         Task<List<GameViewResult>> GetGameResult(int sessionid);
+
+        //symptoms
+
+        void SaveSessionSymptomes(int sessionid, Dictionary<Enums.SymptomKind, List<string>> info);
     }
 }

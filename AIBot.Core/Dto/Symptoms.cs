@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AIBot.Core.Utility;
+﻿using System.Collections.Generic;
 
 namespace AIBot.Core.Dto
 {
     public class Symptoms
     {
-        public string CheckSymptomThere(out Enums.SymptomKind symptomKind)
-        {
-            symptomKind = Enums.SymptomKind.Mental;
-            return "";
-        }
-        public List<string> GetPhysicalSymptoms()
+ 
+        public static List<string> GetPhysicalSymptoms()
         {
             return new List<string>()
             {
@@ -29,7 +22,7 @@ namespace AIBot.Core.Dto
             };
         }
 
-        public List<string> GetMentalSymptoms()
+        public static List<string> GetMentalSymptoms()
         {
             return new List<string>()
             {

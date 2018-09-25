@@ -1,14 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-
+using AIBot.Core.Dto;
+using AIBot.Core.Utility;
 namespace AIBot.Core
 {
     public class Soundex
-    {                               //  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    {
+
+        public static Dictionary<Enums.SymptomKind,List<string>> MatchingWord(string sentence)
+        {
+            var words = sentence.ToLower().Split(' ');
+            var mwords = new List<string>();
+            var pwords = new List<string>();
+            foreach (var item in words)
+            {
+                if (Symptoms.GetMentalSymptoms().Contains(item))
+                {
+                    mwords.Add(item);
+                    continue;
+                }
+                if (Symptoms.GetPhysicalSymptoms().Contains(item))
+                {
+                    pwords.Add(item);
+                }
+            }
+
+            return new Dictionary<Enums.SymptomKind, List<string>>()
+            {
+                {
+                    Enums.SymptomKind.Mental, mwords
+                },
+                {
+                    Enums.SymptomKind.Physical, pwords
+                },
+
+            };
+        }
+
+        //  ABCDEFGHIJKLMNOPQRSTUVWXYZ
         private const string _values = "01230120022455012623010202";
         private const int EncodingLength = 4;
-
-
+         
         public static string Encode(string text)
         {
             char prevChar = ' ';
