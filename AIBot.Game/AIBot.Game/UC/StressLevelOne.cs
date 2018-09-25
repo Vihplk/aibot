@@ -135,11 +135,18 @@ namespace AIBot.Game.UC
         {
             time--;
             lblTime.Text = $"{time}s";
-            if (time<=0)
+
+            if (time > 0 && time <= 20)
+            {
+                speed = 20;
+            }
+            else if (time <= 0)
             {
                 tmrCount.Stop();
                 tmrBackgroundImage.Stop();
-                if (MessageBox.Show($"Your result summary success:{success},failed:{failed}. \n Click ok to save game result", "Game finised"
+                if (MessageBox.Show(
+                        $"Your result summary success:{success},failed:{failed}. \n Click ok to save game result",
+                        "Game finised"
                         , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     SubmitResult();
