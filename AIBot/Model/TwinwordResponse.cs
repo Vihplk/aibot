@@ -13,5 +13,6 @@ namespace AIBot.Model
         public string email { get; set; }
         public string result_code { get; set; }
         public string result_msg { get; set; }
+        public string question { get; set; }
     }
 }

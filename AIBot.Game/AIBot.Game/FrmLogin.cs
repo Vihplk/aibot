@@ -17,12 +17,12 @@ namespace AIBot.Game
         {
             try
             {
-                var response = HttpRequester.Get($"{Globalconfig.ApiEndPoint}/api/sessions/game/{txtSession.Text}");
-                var gameType = (Enums.StressLevel)Convert.ToInt32(response);
-                Globalconfig.SessionId = txtSession.Text;
-                this.Hide();
-                Console.Beep(700, 1000);
-                new MainForm((Enums.StressLevel)gameType,this).Show();
+                //var response = HttpRequester.Get($"{Globalconfig.ApiEndPoint}/api/sessions/game/{txtSession.Text}");
+                //var gameType = (Enums.StressLevel)Convert.ToInt32(response);
+                //Globalconfig.SessionId = txtSession.Text;
+                //this.Hide();
+                //Console.Beep(700, 1000);
+                new MainForm((Enums.StressLevel)1,this).Show();
             }
             catch (Exception exception)
             {

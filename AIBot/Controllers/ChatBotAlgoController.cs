@@ -49,10 +49,11 @@ namespace AIBot.Controllers
             };
         }
 
-        async Task Compare(string compare, List<string> comparewith)
+        async Task<string> Compare(string compare, List<string> comparewith)
         {
             compare = compare.Replace(" ", "+");
             comparewith.ForEach(p => p = p.Replace(" ", "+"));
+            var responses = new List<TwinwordResponse>();
             foreach (var item in comparewith)
             {
                 var url = $@"{GlobalConfig.TwaipApiEndpoint}?text1={compare}&text2={item}";
@@ -63,8 +64,17 @@ namespace AIBot.Controllers
                     client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
                     var json = await client.GetStringAsync(url);
                     var response = JsonConvert.DeserializeObject<TwinwordResponse>(json);
+                    response.question = item;
+                    responses.Add(response);
                 }
             }
+            var max = responses.Max(p => p.similarity);
+            if (max < GlobalConfig.DefaultChatTreshold)
+            {
+                throw new AnswerCannotIdentity();
+            }
+
+            return responses.First(p => p.similarity == max).question;
         }
 
     }

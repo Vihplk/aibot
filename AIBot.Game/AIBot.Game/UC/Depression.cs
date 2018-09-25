@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AIBot.Game.Logic;
+using AIBot.Game.Utility;
 
 namespace AIBot.Game.UC
 {
@@ -16,9 +17,11 @@ namespace AIBot.Game.UC
         private int failed = 0;
         private int timer = 0;
         private int eatTime = 0;
-        public Depression()
+        private MainForm _mainForm;
+        public Depression(MainForm mainForm)
         {
             InitializeComponent();
+            _mainForm = mainForm;
             Init();
         }
 
@@ -158,5 +161,14 @@ namespace AIBot.Game.UC
             }
            
         }
+        private void SubmitResult()
+        {
+
+            var response =
+                HttpRequester.Get(
+                    $"{Globalconfig.ApiEndPoint}/api/sessions/game/{Globalconfig.SessionId}/{(int)Enums.StressLevel.STRESS_LEVEL_1}/{success}/{failed}");
+            _mainForm.BackToHome(Enums.StressLevel.DEPRESSION);
+        }
+
     }
 }

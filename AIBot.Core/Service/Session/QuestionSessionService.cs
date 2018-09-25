@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AIBot.Core.Domain;
 using AIBot.Core.Dto.QuestionAndAnswer;
@@ -183,6 +182,21 @@ namespace AIBot.Core.Service.Session
                 }
             }
             return fresult;
+        }
+
+        public void SaveSessionSymptomes(int sessionid, Dictionary<Enums.SymptomKind, List<string>> info)
+        {
+            foreach (var entry in info)
+            {
+                if (entry.Value.IsNull() || entry.Value.Count == 0)
+                {
+                    continue;
+                }
+
+                _unitOfWork.UserSessionAnswerSymptomRepository.Insert(
+                    new UserSessionAnswerSymptom(sessionid, true, entry.Key, string.Join(",", entry.Value)));
+            }
+
         }
     }
 }

@@ -14,6 +14,9 @@ namespace AIBot.Core.Infrastructure
         private Repository<UserSession> userSessionRepository;
         private Repository<UserSessionAnswer> userSessionAnswerRepository;
         private Repository<UserSessionGame> userSessionGameRepository;
+        private Repository<UserSessionAnswerSymptom> userSessionAnswerSymptomRepository;
+        private Repository<UserRandomQuestion> userRandomQuestionRepository;
+
         public UnitOfWork(IAIBotDbContext dbcontext)
         {
             Context = (AIBotDbContext)dbcontext;
@@ -36,6 +39,14 @@ namespace AIBot.Core.Infrastructure
 
         public Repository<UserSessionGame> UserSessionGameRepository =>
             userSessionGameRepository ?? (userSessionGameRepository = new Repository<UserSessionGame>(Context));
+
+        public Repository<UserSessionAnswerSymptom> UserSessionAnswerSymptomRepository =>
+            userSessionAnswerSymptomRepository ??
+            (userSessionAnswerSymptomRepository = new Repository<UserSessionAnswerSymptom>(Context));
+
+        public Repository<UserRandomQuestion> UserRandomQuestionRepository =>
+            userRandomQuestionRepository ??
+            (userRandomQuestionRepository = new Repository<UserRandomQuestion>(Context));
 
         public async Task<int> SaveAsync()
         {
