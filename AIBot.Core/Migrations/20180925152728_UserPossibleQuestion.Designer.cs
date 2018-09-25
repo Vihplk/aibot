@@ -12,9 +12,10 @@ using System;
 namespace AIBot.Core.Migrations
 {
     [DbContext(typeof(AIBotDbContext))]
-    partial class AIBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180925152728_UserPossibleQuestion")]
+    partial class UserPossibleQuestion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using AIBot.Core.Dto.QuestionAndAnswer;
 using AIBot.Core.Dto.QuestionAndAnswer.Master;
@@ -9,7 +8,6 @@ using AIBot.Core.Service.Interface;
 using AIBot.Core.Utility;
 using AIBot.Model;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace AIBot.Controllers
 {
@@ -18,13 +16,16 @@ namespace AIBot.Controllers
     {
         private readonly IBotService _botService;
         private readonly IQuestionSessionService _questionSession;
-        public ChatBotController(IBotService botService, IQuestionSessionService questionSession)
+        private readonly IUserRandomQuestionService _userRandomQuestionService;
+        public ChatBotController(IBotService botService, IQuestionSessionService questionSession,
+            IUserRandomQuestionService userRandomQuestionService)
         {
             _botService = botService;
             _questionSession = questionSession;
+            _userRandomQuestionService = userRandomQuestionService;
         }
         [HttpGet,Route("questions/{sessionid:int}/{index:int}")]
-        public async Task<IActionResult> ReadQuestion(int sessionid,int index,bool isRepeat=false)
+        public async Task<IActionResult> ReadQuestion(int sessionid,int index,bool isRepeat=false,string answertoUserRandomeQuestion = "")
         {
             try
             {
@@ -33,7 +34,7 @@ namespace AIBot.Controllers
                     return BadRequest("cannot identify the answer");
                 }
                 var question = (await _botService.Read(UserId, sessionid, index));
-                question.QuestionName = question.QuestionName.ApplyRegx(DisplayName);
+                question.QuestionName = $"{answertoUserRandomeQuestion}{question.QuestionName.ApplyRegx(DisplayName)}";
                 return Ok(question);
             }
             catch(OverExamException e)
@@ -55,17 +56,58 @@ namespace AIBot.Controllers
         {
             try
             {
+                var answer = string.Empty;
+                var question = string.Empty;
+                var extra = string.Empty;
+                var systemAnswer = string.Empty;
+                try
+                {
+                    answer = request.AnswerName.Split('.')[0];
+                }
+                catch (Exception e)
+                {
+                    answer = request.AnswerName;
+                }
+
+                try
+                {
+                    var x = request.AnswerName.Split('.')[1];
+                    if (x.EndsWith('?'))
+                    {
+                        question = x;
+                    }
+                    else
+                    {
+                        extra = x;
+                    }
+                }
+                catch (Exception e)
+                {
+                    //eat
+                }
+
+                #region handle user random question
+
+                if (!String.IsNullOrEmpty(question))
+                {
+                    var questions = await _userRandomQuestionService.ReadRandomQuestionAnswer();
+                    var result = await Compare(question, questions.Select(p => p.PossibleQuestion).ToList());
+                    systemAnswer = questions.First(p => p.PossibleQuestion == result).PossibleAnswer + ".";
+                }
+
+                #endregion
+
                 if (request.IsQuestion())
                 {
                     var possibleSysAnswers = await _questionSession.GetAllPossibleSystemAnswers();
                     MatchAnswerDto mostSutable;
                     try
                     {
-                        mostSutable = await Compare(request.AnswerName, possibleSysAnswers);
+                        mostSutable = await Compare(answer, possibleSysAnswers);
                     }
                     catch (Exception e)
                     {
-                        return await ReadQuestion(request.SessionId, request.Index, true);
+                        return await ReadQuestion(request.SessionId, request.Index, true, systemAnswer);
                     }
 
                     request.Value = mostSutable.MatchingAnswerValue;
@@ -74,7 +116,7 @@ namespace AIBot.Controllers
                     await _botService.GiveAnswer(request);
                 }
 
-                return await ReadQuestion(request.SessionId, request.Index);
+                return await ReadQuestion(request.SessionId, request.Index, answertoUserRandomeQuestion: systemAnswer);
             }
             catch (Exception e)
             {

@@ -12,6 +12,8 @@ namespace AIBot.Core.Infrastructure
         Repository<UserSession> UserSessionRepository { get; }
         Repository<UserSessionAnswer> UserSessionAnswerRepository { get; }
         Repository<UserSessionGame> UserSessionGameRepository { get; }
+        Repository<UserSessionAnswerSymptom> UserSessionAnswerSymptomRepository { get; }
+        Repository<UserRandomQuestion> UserRandomQuestionRepository { get; }
         Task<int> SaveAsync();
     }
 }

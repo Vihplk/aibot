@@ -30,5 +30,10 @@ namespace AIBot.Core.Utility
             Anx,
             Dep
         }
+
+        public enum SymptomKind
+        {
+            Physical=1,Mental
+        }
     }
 }
