@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace AIBot.Core.Dto
 {
@@ -7,7 +8,7 @@ namespace AIBot.Core.Dto
  
         public static List<string> GetPhysicalSymptoms()
         {
-            return new List<string>()
+            return (new List<string>()
             {
                 "Headaches",
                 "Discomfort",
@@ -19,12 +20,12 @@ namespace AIBot.Core.Dto
                 "Sweating",
                 "Dizziness",
                 "Twitches"
-            };
+            }).Select(p=>p.ToLower()).ToList();
         }
 
         public static List<string> GetMentalSymptoms()
         {
-            return new List<string>()
+            return (new List<string>()
             {
                 "Feeling sad",
                 "Feeling down",
@@ -44,7 +45,7 @@ namespace AIBot.Core.Dto
                 "Loneliness",
                 "Isolated",
 
-            };
+            }).Select(p => p.ToLower()).ToList();
         }
     }
 }
