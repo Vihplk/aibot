@@ -10,117 +10,173 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>AI Consulting</title>
-    
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.rtl.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.silver.min.css"/>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.mobile.all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../Dinusha/css/dash.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Changa' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Assistant' rel='stylesheet'>
+
+
+    <link rel="stylesheet" type="text/css" href="../dinusha/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../dinusha/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../dinusha/css/narrow.css">
+    <link rel="stylesheet" type="text/css" href="../dinusha/css/rtl.css">
+    <link rel="stylesheet" type="text/css" href="../dinusha/css/silver.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
 
-    <link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="https://getbootstrap.com/docs/3.3/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <script src="https://getbootstrap.com/docs/3.3/assets/js/ie-emulation-modes-warning.js"></script>
 </head>
 
 <body>
+    <div id="main">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="http://mindhealer.tk/">Mind Healer</a>
 
-<div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#">Dashboard</a></li>
-                <li role="presentation"><a href="#" id="createnewsession">Create New Exam</a></li>
-                <li role="presentation"><a href="../images/game.rar" id="createnewsession">Download Game</a></li>
-                <li role="presentation"><a href="#" id="logout">Logout</a></li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">AI Consulting</h3>
-    </div>
-    <div class="row marketing">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Graph</a></li>
-            <li><a data-toggle="tab" href="#menu1">Result</a></li>
-            <li><a data-toggle="tab" href="#menu2">Forcasting</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <div class="col-lg-12">
-                    <div id="chart2"></div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                 </div>
-            </div>
-            <div id="menu1" class="tab-pane fade">
-                <div class="col-lg-12">
-                    <img src="../images/chatbot_rating.PNG"/>
-                    <div id="placeholder">
-                        <b>Your Sessions</b>
-                        <input id="sessions" placeholder="Select session..." style="width: 100%;"/>
-                        <div id="grid" style="width: 1700px"></div>
-                        
-                        <h2>Game Result</h2>
-                        <div id="gridGameResult" style="width: 600px"></div>
+
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <div id="pad">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Information <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="http://localhost:5500/view/dashboard.html">Dashboard</a></li>
+                               
+                                </ul>
+                            </li>
+                            <!--<li><a href="https://mindhealer.000webhostapp.com/Photo/Gallery.html">Gallery</a></li>-->
+                            <!--<li><a href="https://mindhealer.000webhostapp.com/Research/contact.html">Contact</a></li>
+                             <li><a href="https://mindhealer.000webhostapp.com/AboutUs.html">About</a></li>-->
+                            <li role="presentation"><a href="#" id="createnewsession">Let's Chat</a></li>
+                            <li role="presentation"><a href="../images/game.rar" id="createnewsession">Download Game Pack</a></li>
+                            <li role="presentation"><a href="#" id="logout">Logout</a></li>
+
+
+                            <!--<li><a href="#" id="mybtn" data-toggle="modal" data-target="#mymodal" style="color:orange; font-size:25px;">try me free</a></li>-->
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div id="menu2" class="tab-pane fade">
-                <div class="col-lg-12">
-                    <br/>
-                    <input id="cmbStessType"/>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <br/>
-                        <button type="button" id="naive" class="btn btn-default">Naive</button>
-                        <button type="button" id="sma" class="btn btn-default">SMA</button>
-                        <button type="button" id="wma" class="btn btn-default">WMA</button>
-                        <button type="button" id="es" class="btn btn-default">ES</button>
-                        <button type="button" id="ars" class="btn btn-default">ARS</button>
-                        <br/>
-                        <h1 id="type"></h1>
-                        <br/>
-                        <table class="table table-condensed" width="50%">
-                            <tr class="danger">
-                                <td>MSD</td>
-                                <td><label id="msd">0</label></td>
-                            </tr>
-                            <tr class="info">
-                                <td>MAD</td>
-                                <td>
-                                    <label id="mad">0</label>
-                                </td>
-                            </tr>
-                            <tr class="danger">
-                                <td>MPE</td>
-                                <td><label id="mpe">0</label></td>
-                            </tr>
-                            <tr class="info">
-                                <td>MAPE</td>
-                                <td><label id="mape">0</label></td>
-                            </tr>
-                            <tr class="danger">
-                                <td>TS</td>
-                                <td><label id="ts">0</label></td>
-                            </tr>
-                            <tr class="info">
-                                <td>MSE</td>
-                                <td><label id="mse">0</label></td>
-                            </tr>
-                        </table>
-                        <div id="grid2"></div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ol class="nav nav-pills pull-right">
+                    <!--<li role="presentation" class="active"><a href="#">Dashboard</a></li>-->
+                    <!--<li role="presentation"><a href="#" id="createnewsession">Let's Chat</a></li>
+                    <li role="presentation"><a href="../images/game.rar" id="createnewsession">Download Game</a></li>-->
+                    <!--<li role="presentation"><a href="#" id="logout">Logout</a></li>-->
+                </ol>
+            </nav>
+            <!--<h3 class="text-muted">AI Consulting</h3>-->
+        </div>
+        <div class="row marketing">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Summery</a></li>
+                <li><a data-toggle="tab" href="#menu1">Results</a></li>
+                <li><a data-toggle="tab" href="#menu2">Forecasting</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <div class="col-lg-12">
+                        <div id="chart2"></div>
+                    </div>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                    <div class="col-lg-12">
+                        <img src="../images/chatbot_rating.PNG" />
+                        <div id="placeholder">
+                            <b>Your Sessions</b><br />
+                            <input id="sessions" placeholder="Select session..." style="width: 60%;" />
+                            <div id="grid" style="width: 800px; height:200px;"></div>
+
+                            <b>Game Results</b>
+                            <div id="gridGameResult" style="width: 800px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <div class="col-lg-12">
+                        <br />
+                        <input id="cmbStessType" />
+                        <div class="btn-group" role="group" aria-label="...">
+                            <br />
+                            <button type="button" id="naive" class="btn btn-default">Naive</button>
+                            <button type="button" id="sma" class="btn btn-default">SMA</button>
+                            <button type="button" id="wma" class="btn btn-default">WMA</button>
+                            <button type="button" id="es" class="btn btn-default">ES</button>
+                            <button type="button" id="ars" class="btn btn-default">ARS</button>
+                            <br />
+                            <h1 id="type"></h1>
+                            <br />
+                            <table class="table table-condensed" width="50%">
+                                <tr class="danger">
+                                    <td>MSD</td>
+                                    <td><label id="msd">0</label></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>MAD</td>
+                                    <td>
+                                        <label id="mad">0</label>
+                                    </td>
+                                </tr>
+                                <tr class="danger">
+                                    <td>MPE</td>
+                                    <td><label id="mpe">0</label></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>MAPE</td>
+                                    <td><label id="mape">0</label></td>
+                                </tr>
+                                <tr class="danger">
+                                    <td>TS</td>
+                                    <td><label id="ts">0</label></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>MSE</td>
+                                    <td><label id="mse">0</label></td>
+                                </tr>
+                            </table>
+                            <div id="grid2"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <footer class="footer">
-        <p>sliit 4th year project</p>
-    </footer>
 
-</div> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://getbootstrap.com/docs/3.3/assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="../js/session.js"></script>
-<script src="../js/stasis.js"></script>
+    </div>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="https://getbootstrap.com/docs/3.3/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../js/session.js"></script>
+    <script src="../js/stasis.js"></script>
+
+
+
+        <nav class="navbar1 navbar-fixed-bottom">
+            <div class="container-fluid">
+                <a class="navbar-brand"><p>&#169; 2018 copyright Mind Healer. All Rights Reserved</p></a>
+            </div>
+        </nav>
+ 
+
+
+
 </body>
 </html>

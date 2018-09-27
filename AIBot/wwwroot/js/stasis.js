@@ -6,7 +6,7 @@ $(document).ready(function () {
         selectable: "multiple cell",
         allowCopy: true,
         columns: [
-            { field: "id" },
+            { field: "Id" },
             { field: "question" },
             { field: "userAnswer" },
             { field: "summery" },
@@ -21,7 +21,7 @@ $(document).ready(function () {
             { field: "gameType" },
             { field: "attempt" },
             { field: "success" },
-            { field: "failed" },
+            { field: "fail" },
             { field: "percentage" }
         ],
         dataSource: []
@@ -32,11 +32,11 @@ $(document).ready(function () {
         columns: [
             { field: "instance" },
             { field: "value" },
-            { field: "forecast" },
-            { field: "error" },
-            { field: "absoluteError" },
-            { field: "percentError" },
-            { field: "absolutePercentError" }
+            { field: "forecast" }
+            //{ field: "error" },
+            //{ field: "absoluteError" },
+            //{ field: "percentError" },
+            //{ field: "absolutePercentError" }
         ],
         dataSource: []
     });
@@ -65,7 +65,7 @@ $(document).ready(function () {
     function createChart(yaxe, stress,anix,depression) {
         $("#chart2").kendoChart({
             title: {
-                text: "Stess levels"
+                text: "Symptom levels"
             },
             legend: {
                 visible: false
@@ -77,10 +77,10 @@ $(document).ready(function () {
                 name: "Stress",
                 data: stress
             }, {
-                name: "anix",
+                name: "Anxiety",
                 data: anix
             }, {
-                name: "depression",
+                name: "Depression",
                 data: depression
             }],
             valueAxis: {
