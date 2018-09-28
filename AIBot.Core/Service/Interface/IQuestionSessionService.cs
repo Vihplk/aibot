@@ -26,5 +26,7 @@ namespace AIBot.Core.Service.Interface
         //symptoms
 
         void SaveSessionSymptomes(int sessionid, Dictionary<Enums.SymptomKind, List<string>> info);
+
+        Task<List<KeyValuePair<string, int>>> SessionSymptomes(int sessionid);
     }
 }

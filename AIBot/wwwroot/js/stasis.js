@@ -40,7 +40,15 @@ $(document).ready(function () {
         ],
         dataSource: []
     });
-
+    $("#gridSymptoms").kendoGrid({
+        selectable: "multiple cell",
+        allowCopy: true,
+        columns: [
+            { field: "key" },
+            { field: "value" }
+        ],
+        dataSource: []
+    });
     $("#sessions").kendoComboBox({
         dataTextField: "value",
         dataValueField: "key",
@@ -54,6 +62,10 @@ $(document).ready(function () {
             xhr('/api/sessions/game/score/' + e.dataItem.key, 'get', (e) => {
                 var grid2 = $("#gridGameResult").data("kendoGrid");
                 grid2.setDataSource(e);
+            });
+            xhr('/api/sessions/' + e.dataItem.key+'/symptoms', 'get', (e) => {
+                var grid3 = $("#gridSymptoms").data("kendoGrid");
+                grid3.setDataSource(e);
             });
         }
     });

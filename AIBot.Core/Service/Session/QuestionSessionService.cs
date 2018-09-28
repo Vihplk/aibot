@@ -35,7 +35,7 @@ namespace AIBot.Core.Service.Session
             return (await (_unitOfWork.UserSessionRepository.TableAsNoTracking
                         .Where(p => p.UserId == userid && p.IsSessionComplete).Select(p => new {p.Id, p.DateTime,p.StressType}))
                     .OrderByDescending(p => p.Id)
-                    .ToListAsync()).Select(p => new KeyValuePair<int, string>(p.Id, $"{p.DateTime}-({((Enums.Game)p.StressType).ToString()})"))
+                    .ToListAsync()).Select(p => new KeyValuePair<int, string>(p.Id, $"{p.DateTime}-({p.Id})=>({((Enums.Game)p.StressType).ToString()})"))
                 .ToList();
         }
 
@@ -197,6 +197,22 @@ namespace AIBot.Core.Service.Session
                     new UserSessionAnswerSymptom(sessionid, true, entry.Key, string.Join(",", entry.Value)));
             }
 
+        }
+
+        public async Task<List<KeyValuePair<string, int>>> SessionSymptomes(int sessionid)
+        {
+            var result =  await _unitOfWork.UserSessionAnswerSymptomRepository.TableAsNoTracking
+                .Where(p => p.SessionId == sessionid).Select(p => new {p.Symptoms,p.SymptomKind}).ToListAsync();
+
+            var dist = result.DistinctBy(p=>p.Symptoms).ToList()
+                .Select(p => new KeyValuePair<string, int>(p.Symptoms, 0)).ToList();
+            var x = new List<KeyValuePair<string, int>>();
+            foreach (var item in dist)
+            {
+                x.Add(new KeyValuePair<string, int>($"{item.Key}({result.First(p=>p.Symptoms==item.Key).SymptomKind.ToString()})", result.Count(p => p.Symptoms == item.Key)));
+            }
+
+            return x;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace AIBot.Core.Infrastructure
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
-        private readonly AIBotDbContext context;
+        public readonly AIBotDbContext context;
         private DbSet<T> entities;
         string errorMessage = string.Empty;
         public Repository(AIBotDbContext context)
