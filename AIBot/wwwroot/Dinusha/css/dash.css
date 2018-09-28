@@ -1,0 +1,52 @@
+﻿#main .navbar {
+    background-color: #477be4 !important;
+}
+
+#main #pad li {
+    padding: 8px;
+}
+
+#main .navbar-header a {
+    padding-top: 20px;
+    font-family: 'Audiowide';
+    padding-left: 70px;
+    font-size: 40px;
+    color: white;
+}
+
+#main .nav > li > a:focus, .nav > li > a:hover {
+    color: black;
+}
+
+#main li a {
+    color: white;
+    font-family: 'Changa';
+    font-size: 18px;
+}
+
+
+.navbar1 {
+    background-color: white;
+    font-size: 17px;
+    font-family: "Javanese Text", sans-serif;
+    color: white;
+    font-weight: bold;
+    position:absolute;
+    left:10px;
+}
+
+a p {
+    
+    padding-top: 8px;
+    color: black;
+    font-family: "Javanese Text", sans-serif;
+    font-size: 14px;
+    
+}
+
+#main .nav1 > li {
+    /*padding: 0.3em 0.4em;*/
+    display: block;
+}
+
+
