@@ -89,5 +89,10 @@ namespace AIBot.Controllers
         {
            return Ok(await _sessionService.GetGameResult(session));
         }
+        [HttpGet, Route("sessions/{session}/symptoms")]
+        public async Task<IActionResult> GetSymptomes(int session)
+        {
+            return Ok(await _sessionService.SessionSymptomes(session));
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using AIBot.Core;
+using AIBot.Core.Domain;
 using AIBot.Core.Domain.Master;
+using AIBot.Core.Dto;
 using AIBot.Core.Dto.QuestionAndAnswer.Master;
 using AIBot.Core.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -49,13 +51,14 @@ namespace AIBot
             services.AddTransient<IQuestionSessionService, QuestionSessionService>();
             services.AddTransient<IBotService, BotService>();
             services.AddTransient<ITimeSeriesService, TimeSeriesService>();
+            services.AddTransient<IUserRandomQuestionService, UserRandomQuestionService>();
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<QuestionDto, Question>().ReverseMap();
                 cfg.CreateMap<Answer, AnswerDto>()
                     .ForMember(des => des.AnswerName, p2 => p2.MapFrom(sou => sou.AnswerName.Replace(" ", "+")));
                 cfg.CreateMap<AnswerDto, Answer>();
-
+                cfg.CreateMap<UserRandomQuestionDto, UserRandomQuestion>().ReverseMap();
             });
         }
 

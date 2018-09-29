@@ -67,34 +67,42 @@ namespace AIBot.Game
 
         public void BackToHome(Enums.StressLevel stresslevel)
         {
-            tabPage1.Controls.RemoveAt(0);
-            tabPage1.Controls.Add(new GameStart(this, Enums.StressLevel.STRESS_LEVEL_1));
-
-            switch (stresslevel)
+            try
             {
-                case Enums.StressLevel.STRESS_LEVEL_1:
-                    tabPage1.Controls.RemoveAt(0);
-                    tabPage1.Controls.Add(new GameStart(this, Enums.StressLevel.STRESS_LEVEL_1));
-                    break;
-                case Enums.StressLevel.STRESS_LEVEL_2:
-                    tabPage2.Controls.RemoveAt(0);
-                    tabPage2.Controls.Add(new GameStart(this, Enums.StressLevel.STRESS_LEVEL_2));
-                    break;
-                case Enums.StressLevel.STRESS_LEVEL_3:
-                    tabPage3.Controls.RemoveAt(0);
-                    tabPage3.Controls.Add(new StressLevelThree());
-                    break;
-                case Enums.StressLevel.ANXIETY:
-                    tabPage4.Controls.RemoveAt(0);
-                    tabPage4.Controls.Add(new Anxiety());
-                    break;
-                case Enums.StressLevel.DEPRESSION:
-                    tabPage5.Controls.RemoveAt(0);
-                    tabPage5.Controls.Add(new Depression());
-                    break;
-                default:
-                    throw new ArgumentException();
+                tabPage1.Controls.RemoveAt(0);
+                tabPage1.Controls.Add(new GameStart(this, Enums.StressLevel.STRESS_LEVEL_1));
+
+                switch (stresslevel)
+                {
+                    case Enums.StressLevel.STRESS_LEVEL_1:
+                        tabPage1.Controls.RemoveAt(0);
+                        tabPage1.Controls.Add(new GameStart(this, Enums.StressLevel.STRESS_LEVEL_1));
+                        break;
+                    case Enums.StressLevel.STRESS_LEVEL_2:
+                        tabPage2.Controls.RemoveAt(0);
+                        tabPage2.Controls.Add(new GameStart(this, Enums.StressLevel.STRESS_LEVEL_2));
+                        break;
+                    case Enums.StressLevel.STRESS_LEVEL_3:
+                        tabPage3.Controls.RemoveAt(0);
+                        tabPage3.Controls.Add(new StressLevelThree());
+                        break;
+                    case Enums.StressLevel.ANXIETY:
+                        tabPage4.Controls.RemoveAt(0);
+                        tabPage4.Controls.Add(new Anxiety());
+                        break;
+                    case Enums.StressLevel.DEPRESSION:
+                        tabPage5.Controls.RemoveAt(0);
+                        tabPage5.Controls.Add(new GameStart(this, Enums.StressLevel.DEPRESSION));
+                        break;
+                    default:
+                        throw new ArgumentException();
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+           
         }
 
         public void ChangeTabUserController(Enums.StressLevel gameLevel, GameStart gameStart)
@@ -119,7 +127,7 @@ namespace AIBot.Game
                     break;
                 case Enums.StressLevel.DEPRESSION:
                     tabPage5.Controls.Remove(gameStart);
-                    tabPage5.Controls.Add(new Depression());
+                    tabPage5.Controls.Add(new Depression(this));
                     break;
                 default:
                     throw new ArgumentException();
